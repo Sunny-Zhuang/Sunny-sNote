@@ -1,0 +1,7 @@
+a{
+    display: block;
+}
+.collapse a{
+    height: 0;
+    display: none;
+}

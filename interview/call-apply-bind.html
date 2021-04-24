@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .second-face{
+            width: 100px;
+            height: 100px;
+            border: 1px solid tomato;
+            display: flex;
+            justify-content: space-between;
+        }
+        .pin:nth-child(2){
+            align-self: flex-end;
+        }
+        .pin{
+            display: block;
+            width: 24px;
+            height: 24px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <div class="second-face">
+        <span class="pin"></span> 
+        <span class="pin"></span>
+    </div>
+
+    <script type="text/javascript">
+
+        Function.prototype.call = function(obj,...args){
+            if(obj===null||obj===undefined){
+                obj = window
+            }
+            console.error('call calls',this)
+            obj.temp = this
+            const result = obj.temp(...args)
+            delete obj.temp
+            return result
+        }
+
+        Function.prototype.bind = function(obj,...args){
+            console.error('call bind',args)
+            return (...args2)=>{
+                console.error('call bind inner',this)
+                console.error('call bind inner',args2)
+                return this.call(obj,...args,...args2)
+            }
+        }
+
+        function fn(a, b) {
+            this.xxx = 3;
+            console.log(a, b, this)
+        }
+
+        fn(1, 2)
+        console.log(xxx)
+        const obj = { m: 0 }
+        // fn.call(obj, 1, 2)
+        // fn(1, 2)
+        fn.bind(obj)(3, 4)
+        fn(1, 2)
+        
+    </script>
+    </div>
+
+</body>
+
+</html>

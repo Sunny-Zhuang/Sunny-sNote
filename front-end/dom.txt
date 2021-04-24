@@ -1,0 +1,53 @@
+事件冒泡、捕获等理解?
+https://juejin.cn/post/6844903834075021326
+element.addEventListener(event, function, useCapture)
+可能值:
+* true - 事件句柄在捕获阶段执行（即在事件捕获阶段调用处理函数）
+* false- false- 默认。事件句柄在冒泡阶段执行（即表示在事件冒泡的阶段调用事件处理函数）
+
+事件委托？
+1.减少DOM操作，提高性能。2.随时可以添加子元素，添加的子元素会自动有相应的处理事件。
+function colorChange(e){ var e=e||window.event;//兼容性的处理 if(e.target.nodeName.toLowerCase()==="li"){ box.innerHTML="该颜色为 "+e.target.innerHTML; } } color_list.addEventListener("click",colorChange,false)
+
+阻止事件冒泡
+1. 给子级加 event.stopPropagation( )
+$("#div1").mousedown(function(e){
+    var e=event||window.event;
+    event.stopPropagation();
+});
+
+2. 在事件处理函数中返回 false
+$("#div1").mousedown(function(event){
+    var e=e||window.event;
+    return false;
+});
+但是这两种方式是有区别的。return false 不仅阻止了事件往上冒泡，而且阻止了事件本身(默认事件)。event.stopPropagation()则只阻止事件往上冒泡，不阻止事件本身。
+阻止默认事件
+（1）event.preventDefault( )
+（2）return false
+
+创建和触发 events?
+textarea.addEventListener('input', function() {
+  // Create and dispatch/trigger an event on the fly
+  // Note: Optionally, we've also leveraged the "function expression" (instead of the "arrow function expression") so "this" will represent the element
+  this.dispatchEvent(new CustomEvent('awesome', { bubbles: true, detail: { text: () => textarea.value } }))
+});
+
+JavaScript获取DOM元素位置和尺寸大小?
+https://www.cnblogs.com/dolphinX/archive/2012/11/19/2777756.html
+1. clientHeight和clientWidth用于描述元素内尺寸，是指 元素内容+内边距 大小，不包括边框（IE下实际包括）、外边距、滚动条部分
+2. offsetHeight和offsetWidth用于描述元素外尺寸，是指 元素内容+内边距+边框，不包括外边距和滚动条部分
+3. clientTop和clientLeft返回内边距的边缘和边框的外边缘之间的水平和垂直距离，也就是左，上边框宽度
+4. offsetTop和offsetLeft表示该元素的左上角（边框外边缘）与已定位的父容器（offsetParent对象）左上角的距离
+5. scrollWidth和scrollHeight是元素的内容区域加上内边距加上溢出尺寸，当内容正好和内容区域匹配没有溢出时，这些属性与clientWidth和clientHeight相等
+6. scrollLeft和scrollTop是指元素滚动条位置，它们是可写的
+经典用处
+注册协议阅读完才给注册
+Box.scrollheight-box.scrolltop === box.clientHeight
+elem.getBoundingClientRect()
+返回元素的大小以及相对于视口的位置。返回一个DOMRect对象。包括元素的 left right top bottom width height x y 属性值。
+
+
+各种元素操作
+https://juejin.cn/post/6844903546136035342
+一般说的都是getElement(s)Byxxxx获取的是动态集合，querySelector获取的是静态集合，读取是getElement(s)Byxxxx快，getElement(s)Byxxxx是dom类，query是选择器类

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+    function newInstance(Fn,...args){
+        console.error('fn',Fn,args)
+        let obj={}
+        let result = Fn.apply(obj,args)
+        if(result instanceof Object){
+            return result
+        }
+        obj._proto_=Fn.prototype
+        return obj;
+    }
+    function newInstanof(obj,type){
+        let proto=obj.__proto__
+        console.error(888,proto,obj)
+        while(proto!==null){
+            console.error('proto',proto)
+            if(proto===type.prototype){
+                return true
+            }else{
+                proto=proto.__proto__
+            }
+        }
+        return false
+    }
+    function Person(name,age){
+        this.name = name
+        this.age = age
+    }
+    const p = new Person('Tom',12)
+    console.error(111,p)
+    const p2 = new newInstance(Person,'tom',13)
+    console.error(222,p2)
+    console.error(444,newInstanof(p,Function))
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

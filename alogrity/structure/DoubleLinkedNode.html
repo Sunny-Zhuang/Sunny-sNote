@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function DoubleLinkedNode() {
+            this.header = null;
+            this.tail=null;
+            this.length = 0;
+            function Node(data) {
+                this.data = data;
+                this.next = null
+                this.prev=null
+            }
+
+            //append
+            DoubleLinkedNode.prototype.append = function (data) {
+               let newNode = new Node(data)
+               if(this.length===0){
+                   this.header=newNode
+                   this.tail=newNode
+               }else{
+                   newNode.prev=this.tail
+                   this.tail.next=newNode
+                   this.tail=newNode
+               }
+               this.length++
+            }
+
+            //toString
+            DoubleLinkedNode.prototype.toString = function () {
+                let current = this.header
+                let resultStr = ''
+                while(current){
+                    resultStr=resultStr+" "+current.data
+                    current=current.next
+                }
+                return resultStr
+            }
+
+            //insert
+            DoubleLinkedNode.prototype.insert = function (postion, data) {
+               
+            }
+
+            //get
+            DoubleLinkedNode.prototype.get = function (postion) {
+               
+            }
+
+            //indexof
+            DoubleLinkedNode.prototype.indexOf = function (data) {
+               
+            }
+
+            //removeAt
+            DoubleLinkedNode.prototype.removeAt = function (postion) {
+            
+            }
+
+        }
+        var nodeList = new DoubleLinkedNode()
+        nodeList.append(3)
+        nodeList.append(5)
+        nodeList.append(7)
+        nodeList.append(9)
+        nodeList.append(11)
+        nodeList.append(13)
+        nodeList.append(15)
+        nodeList.append(17)
+        console.error('nodeList append', nodeList.toString())
+        nodeList.insert(2, 4)
+        console.error('nodeList insert', nodeList.toString())
+        console.error('nodeList get', nodeList.get(2))
+        console.error('nodeList indexof', nodeList.indexOf(15))
+        nodeList.removeAt(2)
+        console.error('nodeList', nodeList.toString())
+    </script>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+  </style>
+  <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+  <div id="i">aaaa</div>
+
+
+  <script type="text/javascript">
+    //取重复数组中重复最多的元素
+    //way2 n+m
+
+    function MostNumber(arr) {
+      let mapMax = new Map();
+      arr.forEach(item => {
+        if (mapMax.has(item) && mapMax.get(item)) {
+          mapMax.set(item, mapMax.get(item) + 1)
+        } else {
+          mapMax.set(item, 1)
+        }
+      })
+      let maxMapValue = 0;
+      let maxMaxKey = '';
+      for (let [key, value] of mapMax) {
+        if (value > maxMapValue) {
+          maxMapValue = value;
+          maxMaxKey = key
+        }
+      }
+      return maxMaxKey
+    }
+    // let mapName = new Map();
+    // name.forEach(item => {
+    //   if (mapName.has(item) && mapName.get(item)) {
+    //     mapName.set(item, mapName.get(item) + 1)
+    //   } else {
+    //     mapName.set(item, 1)
+    //   }
+    // })
+    // console.error('mapName', mapName)
+    // let maxMapValue = 0;
+    // let maxMaxKey = '';
+    // for (let [key, value] of mapName) {
+    //   if (value > maxMapValue) {
+    //     maxMapValue = value;
+    //     maxMaxKey = key
+    //   }
+    // }
+    console.error('MostNumber', MostNumber([1, 2, 2, 1, 3, ,5,5,5,5,5,51, 1]))
+
+
+
+
+
+
+
+    document.body.addEventListener("mousedown", () => {
+
+      console.log("key1")
+
+    }, true)
+
+    
+
+    document.getElementById("i").addEventListener("mousedown", () => {
+
+      console.log("key2")
+
+   }, true)
+
+    
+
+    document.body.addEventListener("mousedown", () => {
+
+      console.log("key3")
+
+    }, false)
+
+    
+
+    document.getElementById("i").addEventListener("mousedown", () => {
+
+      console.log("key4")
+
+    }, false)
+
+
+    setTimeout(function() {
+
+    console.log('setTimeout');
+
+})
+
+new Promise(function(resolve) {
+
+    console.log('promise');
+
+    for (let i = 0; i < 10000; i++) {
+
+       if(i === 10) {
+
+            console.log('for');
+        }
+
+      i == 9999 && resolve('resolve');
+
+    }
+
+}).then(function(val) {
+
+    console.log(val);
+
+})
+
+console.log('console');
+
+
+
+var result = "123456789".replace(/(?!^)(?=(\d{3})+$)/g, ',') 
+console.log(result);
+
+function formatMoney(val){
+  if(typeof val === 'number'){
+    return val.toString().replace(/(?!^)(?=(\d{3})+$)/g, ',') 
+  }else{
+    throw Error('invalid input')
+  }
+}
+
+console.error(1111,formatMoney(1234567890))
+const getCookie = function (name) {
+  let arr;
+  const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+  if (arr = a.match(reg)){
+      console.error(arr)
+    return unescape(arr[2]);
+  }
+  return null;
+};
+
+  </script>
+
+  </div>
+
+</body>
+
+</html>

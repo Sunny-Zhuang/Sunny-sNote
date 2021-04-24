@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+
+        function pull(array,...args){
+            return array.filter(item=>{
+                return args.indexOf(item)!==-1
+            })
+        }
+
+       var array=[1,3,5,3,7]
+       console.error(3333,pull(array,2,7,3,7))
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

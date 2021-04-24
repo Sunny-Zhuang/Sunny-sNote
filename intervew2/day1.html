@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        @media only screen {
+            @media (min-width: 768px) {
+                body{
+                    background-color: yellowgreen;
+                }
+            }
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            /* margin: 0 auto; */
+            background-color: cornflowerblue;
+            position: relative;
+        }
+
+        .box1 {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            background-color: tomato;
+            position: relative;
+        }
+
+        .box2 {
+            width: 50px;
+            height: 50px;
+            /* margin: 0 auto; */
+            background-color: violet;
+            position: relative;
+        }
+
+        .box ul li {
+            list-style: none;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            height: 2px;
+            width: 40px;
+            background-color: red;
+            position: absolute;
+            transform-origin: left center;
+            transition: 0.5s;
+        }
+
+        .box ul li:nth-child(1) {
+            top: 10px;
+        }
+
+        .box ul li:nth-child(2) {
+            top: 25px;
+        }
+
+        .box ul li:nth-child(3) {
+            top: 40px;
+        }
+
+        .box a:hover ul li:nth-child(2) {
+            opacity: 0;
+        }
+
+        .box a:hover ul li:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .box a:hover ul li:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../mi/css/global.css">
+</head>
+
+<body class="clearfix">
+    <div class="wrapper">
+        <div class="box clearfix">
+            <a href="javascript:;" class="clearfix">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </a>
+        </div>
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </div>
+    <script type="text/javascript">
+
+        //1剩余参数和 arguments 对象的区别是什么？
+        // 剩余参数只包含那些没有对应形参的实参（可以是参数的 部分），而 arguments 对象包含了传给函数的所有实参（是参数的全部）
+        // arguments 对象不是一个真实的数组，而剩余参数是真实的 Array 实例 也就是说，能够在它上面直接使用所有的数组方法，比如 sort、map、forEach、pop
+        // arguments 对象还有一些附加的属性(如 callee 属性)
+        // 如果想在 arguments 对象上使用数组方法，首先要将它转换为真实的数组，比如使用 [].slice.call(arguments)
+
+        //2如何封装一个 javascript 的类型判断函数？
+        function getType(value) {
+            // 判断数据是 null 的情况 
+            if (value === null) {
+                return value + "";
+            }
+            // 判断数据是引用类型的情况 
+            if (typeof value === "object") {
+                let valueClass = Object.prototype.toString.call(value),
+                type = valueClass.split(" ")[1].split("");
+                type.pop();
+                return type.join("").toLowerCase();
+            } else {
+                // 判断数据是基本数据类型的情况和函数的情况 
+                return typeof value
+            }
+        }
+
+        //3实现一个页面操作不会整页刷新的网站，并且能在浏览器前进、后 退时正确响应。给出你的技术实现方案？
+        // http://blog.chenxu.me/post/detail?id=ed4f0732-897f-48e4-9d4f-821e82f17fad   
+        //都是同源才行
+        //直接改变location.href
+        //通过h5新的history.pushstate, popstate,replacestate
+    </script>
+    </div>
+
+</body>
+
+</html>

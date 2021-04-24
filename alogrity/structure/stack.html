@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function Stack(){
+            let arr=[]
+            this.push=function(element){
+                arr.push(element)
+            }
+            this.pop=function(){
+                return arr.pop()
+            }
+            this.peek=function(){
+                return arr[arr.length-1]
+            }
+            this.size = function(){
+                return arr.length
+            }
+            this.isEmpty=function(){
+                return arr.length===0
+            }
+        }
+
+        const stack1 = new Stack()
+        stack1.push(1)
+        stack1.push('abc')
+        console.error(stack1.peek(),stack1.size(),stack1.isEmpty())
+
+        //example dec to 2 
+        function dec2bin(decNumber){
+            let stack2 = new Stack()
+            while(decNumber>0){
+                stack2.push(decNumber%2)
+                decNumber=Math.floor(decNumber/2)
+            }
+            let result=''
+            while(!stack2.isEmpty()){
+                result = result + stack2.pop()
+            }
+            return result
+        }
+        console.error(1111,dec2bin(10))
+    </script>
+
+    </div>
+
+</body>
+
+</html>

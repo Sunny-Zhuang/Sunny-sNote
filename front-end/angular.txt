@@ -1,0 +1,124 @@
+angular
+生命周期
+ngOnChanges
+在有输入属性的情况下才会调用，该方法接受当前和上一属性值的SimpleChanges对象。如果有输入属性，会在ngOnInit之前调用。
+ngOnInit
+在组件初始化的时候调用，只调用一次，在第一次调用ngOnChanges之后调用
+ngDoCheck
+在组件定义的属性或方法变更时调用(用于脏值之检测，非常耗性能，因为会把所有的属性和方法都检测一遍），会在ngOnChanges()和ngOnInit()之后
+ngAfterContentInit
+在组件内容初始化之后调用，在第一次ngDoCheck之后调用，只调用一次
+ngAfterContentChecked
+在组件每次检查内容放生变更时调用。在ngAfterContentInit和每次ngDoCheck之后调用
+ngAfterViewInit
+在组件相应的视图初始化之后调用，第一次ngAfterContentChecked之后调用，只调用一次
+ngAfterViewChecked
+在组件每次检查视图发生变更时调用。ngAfterViewInit和每次ngAfterContentChecked之后调用。
+ngOnDestroy
+在组件销毁前调用，做一些清理工作，比如退订可观察对象和移除事件处理器，以免导致内存泄漏。
+
+constructor和ngOnInit
+constructor是ES6中class中新增的属性，当class类实例化的时候调用constructor，来初始化类。Angular中的组件就是基于class类实现的，在Angular中，constructor用于注入依赖。
+ngOnInit是Angular中生命周期的一部分，在constructor后执行。在Angular中用于初始化变量和数据绑定等
+NgChanges
+当我们监听了OnChanges钩子。 一旦检测到该组件(或指令)的输入属性发生了变化，Agular就会调用ngOnChanges()方法
+DoCheck
+当组件中属性或函数发生变化时DoCheck会执行脏值检测，遍历所有变量
+
+新特性
+https://www.jianshu.com/p/646ae9a1ac37
+
+angular.json?
+Angular 工作空间 指的是 一个 由Angular CLI创建，并且能够包含多个项目 或者 由单一文件导出配置的库 的目录空间
+这种变化主要还是因为Angular CLI加进了 monorepo (一个空间管理多个项目) 的开发计划模式
+
+promise和rxjs的区别
+Rxjs是一种流的概念
+Promise不能中途取消，不能发射多个值，没有丰富的工具库
+https://segmentfault.com/a/1190000010088631
+https://segmentfault.com/a/1190000009924164
+
+react和angular的区别
+https://blog.csdn.net/jieming2002/article/details/84037215
+React：在性能方面，React 只在调用 setState 时更新dom，而且是先更新虚拟 Dom，再和实际Dom比较，最后更新实际Dom。这个过程与 Angular 的bind方式比较，一是更新 dom 的次数少，二是更新 dom 的内容少，速度肯定快。
+单向数据流
+angular：Angular 是一套完整的框架。组件化复用性，di更加低耦合性
+双向数据流
+
+
+markForCheck和detectChanges
+
+Typescript和JavaScript的区别
+Typescript是JavaScript的 类型化超集，它支持所有JavaScript的语法，并在此基础上添加静态类型定义和面向对象的思想。最终编译成JavaScript运行。
+
+Javascript
+动态类型，运行时明确变量的类型，变量的类型由变量的值决定，并跟随值的改变而改变；
+直接运行在浏览器和node.js环境中；
+弱类型，数据类型可以被忽略的语言。一个变量可以赋不同数据类型的值；
+Typescript
+静态类型，声明时确定类型，之后不允许修改；
+编译运行，始终先编译成JavaScript再运行；
+强类型，一旦一个变量被指定了某个数据类型，如果不经过强制转换，那么它就永远是这个数据类型了；
+使用typescript的好处
+开源，跨平台。它本身不需要考虑运行环境的问题，所有支持JavaScript的地方都可以使用typescript；
+引入静态类型声明，减少不必要的类型判断和文档注释；
+及早发现错误，静态类型检查1或编译时发现问题，不用等到运行；
+类、接口的使用更易于构建和维护组件；
+重构更方便可靠，适合大型项目；
+
+AOT优势
+　　1、渲染得更快
+　　2、需要的异步请求更少
+　　3、需要下载的Angular框架体积更小
+　　4、提早检测模板错误
+　　5、更安全
+
+    基于JIT(Just in Time)编译器的动态引导
+　　在这种方式下，angular会在浏览器端动态编译，然后启动app。
+
+1
+2
+3
+4
+5
+6
+7
+/* 
+  引导使用方式：
+*/
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app.module';
+ 
+platformBrowserDynamic().bootstrapModule(AppModule);
+   基于AOT(Ahead of Time)编译器的静态引导
+　　相对于动态引导，静态引导会预先在build阶段就生成一些工厂类，其中对应AppModule的工厂类为NgAppModuleFactory。
+　　使用静态引导有几个优点：
+　　　　1、因为是预先编译好，不需要向浏览器传输Angular的编译器，所以传输的内容更小。
+　　　　2、和动态引导需要在浏览器端即时编译不同，静态引导从服务端下载完代码后可即时启动，启动比较快。对于移动设备和一些低延时网络里，这两个有点显得很重要。
+
+/*
+  在main.ts使用AOT模式
+*/
+import { platformBrowser } from '@angular/platform-browser';
+import { AppModuleNgFactory } from './app.module.ngfactory';
+ 
+platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+
+ViewEncapsulation
+ViewEncapsulation 允许设置三个可选的值：
+
+ViewEncapsulation.Emulated - 无 Shadow DOM，但是通过 Angular 提供的样式包装机制来封装组件，使得组件的样式不受外部影响。这是 Angular 的默认设置。
+
+ViewEncapsulation.Native - 使用原生的 Shadow DOM 特性
+
+ViewEncapsulation.None - 无 Shadow DOM，并且也无样式包装
+
+脏检测
+https://segmentfault.com/a/1190000009579737
+
+Rxjs
+https://segmentfault.com/a/1190000009924164
+concatMap 用在可以确定内部的 observable 结束时间比外部 observable 发送时间来快的情境，并且不希望有任何并行处理行为，适合少数要一次一次完成到底的的 UI 动画或特别的 HTTP request 行为。
+switchMap 用在只要最后一次行为的结果，适合绝大多数的使用情境。
+mergeMap 用在并行处理多个 observable，适合需要并行处理的行为，像是多个 I/O 的并行处理。
+

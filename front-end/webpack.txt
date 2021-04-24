@@ -1,0 +1,57 @@
+webpack工程化
+webpack的核心思想是什么?
+https://aotu.io/notes/2020/07/17/webpack-analize/index.html
+
+
+一、webpack的打包原理
+1. 识别入口文件
+2. 通过逐层识别模块依赖(Commonjs、amd或者es6的import，webpack都会对其进行分析，来获取代码的依赖)
+3. webpack做的就是分析代码，转换代码，编译代码，输出代码
+4. 最终形成打包后的代码
+二、什么是loader
+loader是文件加载器，能够加载资源文件，并对这些文件进行一些处理，诸如编译、压缩等，最终一起打包到指定的文件中
+1. 处理一个文件可以使用多个loader，loader的执行顺序和配置中的顺序是相反的，即最后一个loader最先执行，第一个loader最后执行
+2. 第一个执行的loader接收源文件内容作为参数，其它loader接收前一个执行的loader的返回值作为参数，最后执行的loader会返回此模块的JavaScript源码
+三、什么是plugin
+在webpack运行的生命周期中会广播出许多事件，plugin可以监听这些事件，在合适的时机通过webpack提供的API改变输出结果。
+
+四、loader和plugin的区别
+对于loader，它是一个转换器，将A文件进行编译形成B文件，这里操作的是文件，比如将A.scss转换为A.css，单纯的文件转换过程
+plugin是一个扩展器，它丰富了webpack本身，针对是loader结束后，webpack打包的整个过程，它并不直接操作文件，而是基于事件机制工作，会监听webpack打包过程中的某些节点，执行广泛的任务
+
+webpack5的优化
+1.通过持久缓存提高构建速度
+2.增强了树摇功能
+
+怎么自定义一个js库
+1. npm init -y
+2. 入口js里面export工具函数
+3. 改webpack.config.js
+4. npx webpack
+
+webpack
+loader：Css，兼容性（postcss/babel），js语法检测
+Plugin：html，压缩，优化配置
+hmr：hot module replacement热模块替换，一个模块变化，只会改变变化的模块
+hot：true 然后重启webpack服务
+source-map：开发看报错
+开启babel缓存：CacheDirectory:true
+treeshaking会把没有用到的js不打包
+1.必须是production环境
+2.必须es6模块
+Jackson里面加sideEffect去排除css，less等
+懒加载：用到的时候再加载
+预加载：等浏览器空闲了再偷偷加载	
+实现pwa需要workbox plugin 打开serviceworker
+ddl单独打包库，就不用重复打包，会生成menifest文件
+external排除一些库的打包（jquery）
+缓存 contenthash
+
+对于 CommonJS 和 ES6 中的模块化的两者区别是：
+
+前者支持动态导入，也就是 require(${path}/xx.js)，后者目前不支持。
+
+前者是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响。
+
+前者在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是后者采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化
+https://github.com/LuckyWinty/fe-weekly-questions/issues/19

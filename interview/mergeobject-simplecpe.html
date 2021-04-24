@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+        function mergeObject(...args){
+            let result = {}
+            args.forEach(arg=>{
+                console.error('arg',arg)
+                Object.keys(arg).forEach(key=>{
+                    if(!result.hasOwnProperty(key)){
+                        result[key]=arg[key]
+                        console.error('result',result)
+                    }else{
+                        console.error(result[key],arg[key]);
+                        result[key] = [].concat(result[key],arg[key])
+                    }
+                })
+            })
+            return result;
+        }
+
+        const obj1={
+            a:[{x:2},{y:4}],
+            b:1
+        }
+        const obj2={
+            a:{z:33},
+            b:[2,3],
+            c:'foo'
+        }
+        console.error(11111,mergeObject(obj1,obj2))
+
+        function shallowClone(target){
+            if(target instanceof Array){
+                return [...target]
+            }
+            else if(target !==null && typeof target === 'object'){
+                return {...target}
+            }else{
+                return target
+            }
+        }
+
+        const obj3={a:'aa',
+        b:{c:[1,2]},
+        c:function (){}
+        }
+        const cloneobj=shallowClone(obj3)
+        console.error(2222,cloneobj,obj3[0]===cloneobj[0])
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

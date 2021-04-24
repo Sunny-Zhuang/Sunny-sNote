@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        Array.prototype.map = function(callback){
+            console.error('call custom map')
+            var arr=[]
+            for(let i=0;i<this.length;i++){
+                const result=callback(this[i],i)
+                arr.push(result)
+            }
+            return arr
+        }
+
+        Array.prototype.reduce = function(callback,initial){
+            console.error('call custom reduce')
+            var total=initial
+            for(let i=0;i<this.length;i++){
+                total=callback(total,this[i],i)
+            }
+            return total
+        }
+        
+
+
+       var array=[1,2,4,5]
+       console.error(111,array.map((item)=>item+10))
+       console.error(222,array.reduce((pretotal,item)=>pretotal+item,0))
+       console.error(333,aUtils.map(array,(item)=>item+12))
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

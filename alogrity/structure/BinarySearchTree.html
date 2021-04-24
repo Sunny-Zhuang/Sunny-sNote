@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function BinarySearchTree() {
+            this.root = null;
+            function Node(key) {
+                this.key = key;
+                this.left = null;
+                this.right = null;
+            }
+
+            // 插入节点
+            BinarySearchTree.prototype.insert = function (key) {
+                let newNode = new Node(key)
+                if (this.root === null) {
+                    this.root = newNode
+                } else {
+                    this.insertNode(this.root, newNode)
+                }
+            }
+
+            BinarySearchTree.prototype.insertNode = function (node, newNode) {
+                if (node.key > newNode.key) {
+                    if (node.left === null) {
+                        node.left = newNode
+                    } else {
+                        this.insertNode(node.left, newNode)
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = newNode
+                    } else {
+                        this.insertNode(node.right, newNode)
+                    }
+                }
+            }
+
+            // 先序遍历
+            BinarySearchTree.prototype.preOrderTraversal = function (handler) {
+                this.preOrderTraversalNode(this.root, handler)
+            }
+            BinarySearchTree.prototype.preOrderTraversalNode = function (node, handler) {
+                if (node !== null) {
+                    handler(node.key) //先序中序后序取决于handlen key的位置
+                    this.preOrderTraversalNode(node.left, handler)
+                    this.preOrderTraversalNode(node.right, handler)
+                }
+            }
+
+            //最大值
+            BinarySearchTree.prototype.max = function () {
+                let node = this.root
+                let key = null
+                while (node !== null) {
+                    key = node
+                    node = node.right
+                }
+                return key.key
+            }
+
+            //查找key
+            BinarySearchTree.prototype.find = function (key) {
+                let node = this.root
+                while (node !== null) {
+                    if (key < node.key) {
+                        node = node.left
+                    } else if (key > node.key) {
+                        node = node.right
+                    } else {
+                        return true;
+                    }
+                }
+                return false
+            }
+
+            //删除节点
+            BinarySearchTree.prototype.remove = function (key) {
+                //找到删除的节点
+                let current = this.root
+                let parent = null
+                let isLeft = true
+                while (current.key !== key) {
+                    parent = current
+                    if (key < current.key) {
+                        current = current.left
+                        isLeft = true
+                    }else{
+                        current = current.right
+                        isLeft = false
+                    }
+                    if(current===null){return false}
+                }
+                //判断是叶子节点
+                if(current.left===null&&current.right===null){
+                    if(current===this.root){
+                        this.root=null
+                    }else{
+                        if(isLeft){
+                            parent.left=null
+                        }else{
+                            parent.right=null
+                        }
+                    }
+                }
+
+                //判断只有一个叶子对的节点
+
+                //判断有两个叶子的节点
+
+
+            }
+        }
+
+        var bst = new BinarySearchTree()
+        bst.insert(11)
+        bst.insert(7)
+        bst.insert(15)
+        bst.insert(5)
+        bst.insert(3)
+        bst.insert(9)
+        bst.insert(8)
+        bst.insert(10)
+        bst.insert(13)
+        bst.insert(12)
+        bst.insert(14)
+        bst.insert(20)
+        bst.insert(18)
+        bst.insert(25)
+        bst.insert(6)
+        console.error('bst', bst)
+
+        var resultStr = '';
+        bst.preOrderTraversal(function (key) {
+            console.error(key)
+            resultStr = resultStr + " " + key
+        })
+        console.error('preorder string', resultStr)
+
+        console.error('max', bst.max())
+
+        console.error('find', bst.find(11))
+
+    </script>
+    </div>
+
+</body>
+
+</html>

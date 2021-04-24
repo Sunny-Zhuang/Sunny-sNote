@@ -1,0 +1,90 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+#outer{
+    width: 400px;
+    height: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: tomato;
+    position: relative;
+    overflow: hidden;
+}
+#img-list{
+    width: 1680px;
+    position:absolute;
+    left: 0;
+}
+#img-list li{
+    list-style: none;
+    float: left;
+    margin: 0 10px;
+}
+#outer img{
+    width: 400px;
+    height: 300px;
+}
+#navDiv{
+    position: absolute;
+    bottom: 15px;
+}
+#navDiv a{
+    float: left;
+    background-color: thistle;
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+    margin:2px;
+}
+#navDiv a:hover{
+    background-color: black;
+}
+
+
+
+
+
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img {
+    margin: 0;
+    padding: 0
+}
+fieldset,img {
+    border: 0
+}
+img {
+    display: block
+}
+address,caption,cite,code,dfn,th,var {
+    font-style: normal;
+    font-weight: normal
+}
+ul,ol {
+    list-style: none
+}
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: "SimSun","宋体"
+}
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0
+}
+select,input {
+    vertical-align: middle
+}
+select,input,textarea {
+    font-size: 12px;
+    margin: 0
+}
+input[type="text"],input[type="password"],textarea {
+    outline-style: none;
+    -webkit-appearance: none
+}
+textarea {
+    resize: none
+}
+table {
+    border-collapse: collapse
+}

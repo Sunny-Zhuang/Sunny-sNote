@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function Queue(){
+            let arr=[]
+            this.enqueue=function(element){
+                arr.push(element)
+            }
+            this.dequeue=function(){
+                return arr.shift()
+            }
+            this.front=function(){
+                return arr[arr.length-1]
+            }
+            this.size = function(){
+                return arr.length
+            }
+            this.isEmpty=function(){
+                return arr.length===0
+            }
+        }
+
+        const queue = new Queue()
+        queue.enqueue(1)
+        queue.enqueue('ab')
+        queue.enqueue('bc')
+        queue.dequeue()
+        console.error(111,queue.front())
+
+
+        function PriorityQueue(){
+            let arr=[]
+            function PriorityElement(data,priority){
+                this.data = data;
+                this.priority = priority
+            }
+            this.enqueue=function(data,priority){
+                let element = new PriorityElement(data,priority)
+                if(priority<0||priority>100){
+                    throw Error('exceed the range')
+                }
+                if(arr.length===0){
+                    arr.push(element)
+                }else{
+                    for(let i = 0;i<arr.length;i++){
+                        if(arr[i].priority>priority){
+                            arr.splice(i,0,element)
+                            return
+                        }
+                    }
+                    arr.push(element)
+                }
+            }
+            this.dequeue=function(){
+                return arr.shift()
+            }
+            this.front=function(){
+                return arr[arr.length-1]
+            }
+            this.size = function(){
+                return arr.length
+            }
+            this.isEmpty=function(){
+                return arr.length===0
+            }
+        }
+
+        const queue1 = new PriorityQueue()
+        queue1.enqueue('a',17)
+        queue1.enqueue('ab',1001)
+        queue1.enqueue('abc',9)
+        queue1.enqueue('abcd',16)
+        queue1.dequeue()
+        console.error(2222,queue1.front())
+        
+
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

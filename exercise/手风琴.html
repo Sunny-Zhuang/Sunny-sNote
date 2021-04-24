@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="手风琴.css">
+</head>
+
+<body>
+
+    <div id="my-menu">
+         <div class="collapse">
+             <span>first</span>
+             <a href="javascript:;">aaaa</a>
+             <a href="javascript:;">bbbbb</a>
+             <a href="javascript:;">cccc</a>
+             <a href="javascript:;">ddddd</a>
+         </div>
+         <div class="collapse">
+            <span>second</span>
+            <a href="javascript:;">aaaa</a>
+            <a href="javascript:;">bbbbb</a>
+            <a href="javascript:;">cccc</a>
+            <a href="javascript:;">ddddd</a>
+        </div>
+        <div class=""> 
+            <span>third</span>
+            <a href="javascript:;">aaaa</a>
+            <a href="javascript:;">bbbbb</a>
+            <a href="javascript:;">cccc</a>
+            <a href="javascript:;">ddddd</a>
+        </div>
+
+    </div>
+
+    <script>
+        var mymenu = document.getElementById('my-menu').getElementsByTagName('div')
+        console.error(111,mymenu)
+        for(let i =0;i<mymenu.length;i++){
+            mymenu[i].onclick=function(){
+                console.error(222, mymenu[i].getAttribute('class'))
+                var selectedClass= mymenu[i].getAttribute('class')
+                if(selectedClass){
+                    selectedClass=selectedClass.replace('collapse','')
+                    mymenu[i].setAttribute('class',selectedClass)
+                }else{
+                    selectedClass=selectedClass.concat('collapse')
+                    mymenu[i].setAttribute('class',selectedClass)
+                }
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body{
+            position: relative;
+        }
+        #box{
+            width: 100px;
+            height:100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body style="height:1000px">
+
+    <div id="box"></div>
+    <script type="text/javascript">
+        var box=document.getElementById('box')
+        document.onmousemove=function(event){
+            console.error(event.clientX)
+
+            box.style.left=event.clientX+'px'
+            box.style.top=event.clientY+'px'
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .aa {
+            width: 0;
+            height: 0;
+            border: solid 100px red;
+            border-color: red transparent transparent transparent;
+            border-radius: 100px;
+        }
+    </style>
+    <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <div class="aa"></div>
+
+    <script type="text/javascript">
+        //冒泡排序
+        // function maopao(arr){
+        //     let len = arr.length;
+        //     for(let i=0;i<len-1;i++){
+        //         for(let j=0;j<len-1-i;j++){
+        //             if(arr[j]>arr[j+1]){
+        //                 let temp = arr[j+1]
+        //                 arr[j+1] = arr[j]
+        //                 arr[j] = temp
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+        const arr = [4, 3, 54, 21, 64, 321, 0]
+        // console.error('maopao',maopao(arr))
+
+        //选择排序
+        // function xuanze(arr){
+        //     let len = arr.length;
+        //     for(let i=0;i<len;i++){
+        //         let min = arr[i]
+        //         for(let j = i+1;j<len;j++){
+        //             if(min>arr[j]){
+        //                 min = arr[j]
+        //             }
+        //         }
+        //         arr[i] = min
+        //     }
+        //     return arr
+        // }
+
+        // console.error('xuanze',xuanze(arr))
+
+        //插入排序
+        // function charu(arr) {
+        //     let len = arr.length;
+        //     var j;
+        //     var current;
+        //     for (let i = 1; i < len; i++) {
+        //         j = i - 1
+        //         current = arr[i]
+        //         while (arr[j] > current && j >= 0) {
+        //             arr[j + 1] = arr[j]
+        //             j--
+        //         }
+        //         arr[j + 1] = current
+        //     }
+        //     return arr
+        // }
+
+        // console.error('charu', charu(arr))
+
+        //希尔排序
+        // function shellSort(arr) {
+
+        //     var len = arr.length;
+        //     for(let gap = Math.floor(len/2);gap>0;gap=Math.floor(gap/2)){
+        //         for(let i=gap;i<len;i++){
+        //             let j = i;
+        //             let current = arr[i]
+        //             while(j-gap>=0&&current<arr[j-gap]){
+        //                 arr[j]=arr[j-gap]
+        //                 j=j-gap
+        //             }
+        //             arr[j]=current
+        //         }
+        //     }
+
+        //     return arr;
+
+        // }
+        // console.error('xier', shellSort(arr))
+
+        //快速排序
+        function quickSort(arr) {
+          if(arr.length<=1) return arr
+          let pivotIndex = Math.floor(arr/2)
+          let pivot = arr.splice(pivotIndex,1)[0]
+          let left=[]
+          let right=[]
+          for(let i = 0;i<arr.length;i++){
+              if(arr[i]<pivot){
+                  left.push(arr[i])
+              }else{
+                  right.push(arr[i])
+              }
+          }
+          return quickSort(left).concat([pivot],quickSort(right))
+        };
+        console.error('quick', quickSort(arr))
+
+    </script>
+
+    </div>
+
+</body>
+
+</html>

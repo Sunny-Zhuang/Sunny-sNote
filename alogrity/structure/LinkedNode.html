@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function LinkedNode() {
+            this.header = null;
+            this.length = 0;
+            function Node(data) {
+                this.data = data;
+                this.next = null
+            }
+
+            //append
+            LinkedNode.prototype.append = function (data) {
+                let newNode = new Node(data)
+                if (this.length === 0) {
+                    this.header = newNode
+                } else {
+                    let current = this.header
+                    while (current.next !== null) {
+                        current = current.next
+                    }
+                    current.next = newNode
+                }
+                this.length++
+            }
+
+            //toString
+            LinkedNode.prototype.toString = function () {
+                let current = this.header
+                let nodeStr = ""
+                while (current !== null) {
+                    nodeStr = nodeStr + " " + current.data
+                    current = current.next
+                }
+                return nodeStr
+            }
+
+            //insert
+            LinkedNode.prototype.insert = function (postion, data) {
+                if (postion < 0 || postion > this.length) { return false }
+                let newNode = new Node(data)
+                if (postion === 0) {
+                    newNode.next = this.header
+                    this.header.next = newNode
+                } else {
+                    let index = 1;
+                    let current = this.header
+                    while (index < postion) {
+                        current = current.next
+                        index++
+                    }
+                    newNode.next = current.next
+                    current.next = newNode
+
+                }
+                this.length++
+                return true
+            }
+
+            //get
+            LinkedNode.prototype.get = function (postion) {
+                if (postion < 0 || postion > this.length) { return false }
+                let index = 0;
+                let current = this.header
+                while (index !== postion) {
+                    current = current.next
+                    index++
+                }
+                return current
+            }
+
+            //indexof
+            LinkedNode.prototype.indexOf = function (data) {
+                let index = 0;
+                let current = this.header
+                while (current!==null) {
+                    if(current.data===data){
+                        return index
+                    }else{
+                        current = current.next
+                        index++
+                    }
+                }
+                return -1
+            }
+
+            //removeAt
+            LinkedNode.prototype.removeAt = function (postion) {
+                if (postion < 0 || postion > this.length) { return false }
+                if(postion===0){
+                    this.header=this.header.next
+                }
+                let index = 0;
+                let current = this.header
+                let parent = null
+                while (index < postion) {
+                    parent=current
+                    current = current.next
+                    index++
+                }
+                parent.next=current.next
+                return current.data
+            }
+
+        }
+        var nodeList = new LinkedNode()
+        nodeList.append(3)
+        nodeList.append(5)
+        nodeList.append(7)
+        nodeList.append(9)
+        nodeList.append(11)
+        nodeList.append(13)
+        nodeList.append(15)
+        nodeList.append(17)
+        console.error('nodeList append', nodeList.toString())
+        nodeList.insert(2, 4)
+        console.error('nodeList insert', nodeList.toString())
+        console.error('nodeList get', nodeList.get(2))
+        console.error('nodeList indexof', nodeList.indexOf(15))
+        nodeList.removeAt(2)
+        console.error('nodeList', nodeList.toString())
+    </script>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>exerciseone</title>
+        <link rel="stylesheet" type="text/css" href="mystyle1.css">
+        <style type="text/css">
+            #div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+            </style>
+            <script>
+                function allowDrop(ev)
+                {
+                    ev.preventDefault();
+                }
+                
+                function drag(ev)
+                {
+                    ev.dataTransfer.setData("Text",ev.target.id);
+                }
+                
+                function drop(ev)
+                {
+                    ev.preventDefault();
+                    var data=ev.dataTransfer.getData("Text");
+                    ev.target.appendChild(document.getElementById(data));
+                }
+                </script>
+    </head>
+    <body>
+        <h1>my first title</h1>
+        <hr>
+        <p><strong>my first paragraph</p>
+        <a href="ex1.html" target="_blank"><em>this is a link</a>
+        <br>
+        <img src="/images/test.jpg" width="258" height="39">
+
+        <table>
+            <tr>
+                <th>h1</th>
+                <th>h2</th>
+            </tr>
+            <tr>
+                <td>row1, cell1</td>
+                <td>row2, cell2</td>
+            </tr>
+        </table>
+
+        <ul>
+            <li>coffee</li>
+            <li>milk</li>
+        </ul>
+
+        <form>
+            first name: <input type="text" name="firstname">
+        </form>
+
+        <iframe src="ex1.html" width="200" height="200" name="aaaa"></iframe>
+        <p><a href="http://www.runoob.com" target="aaaa">aaaa</p>
+
+
+        <br>
+
+        <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000"></canvas>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+            <polygon points="100,10 40,180 190,60 10,60 160,180"
+            style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+        </svg>
+
+        <div id="div1" ondrop="drop(event)" ondropover="allowDrop(event)" > </div>
+        <br>
+        <img loading="lazy" id="drag1" src="images/test.jpg" draggable="true" ondragstart="drag(event)" width="336" height="69">
+
+
+        <script>
+            // document.write("hello world")
+            var c = document.getElementById("myCanvas")
+            var ctx=c.getContext("2d")
+            ctx.fillStyle-"#FF0000"
+            ctx.fillRext(0,0,150,75)
+            // function allowDrop(ev){
+            //     ev.preventDefault();
+            // }
+            // function drag(ev){
+            //     ev.dataTransfer.setData("Text",ev.target.id)
+            // }
+            // function drop(ev){
+            //     ev.preventDefault();
+            //     var data = ev.dataTransfer.getData("Text")
+            //     ve.target.appendChild(document.getElementById(data))
+            // }
+        </script>
+    </body>
+</html>

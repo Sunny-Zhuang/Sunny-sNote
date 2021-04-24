@@ -1,0 +1,209 @@
+
+选择器优先级?
+内联样式》id选择器〉类和伪类选择器》元素选择器
+
+说说float？
+可以使auto等式不必满足，且从文档流中脱离
+
+脱离文档流？
+1.浮动元素不会盖住文字，文字会自动环绕在浮动元素的周围
+2.行内元素和块元素的特性失效了
+3.高度塌陷
+4.没脱离的元素被脱离文档流元素覆盖
+
+什么是高度塌陷？
+浮动布局中，当子元素浮动后，离开文档流，就会无法撑起父元素的高度
+Way1:overflow：hidden
+Way2:用clear解决塌陷问题 .box::after{clear:both; display:block；content：‘’}
+
+什么是bfc？
+块级格式化环境，是一个css中隐含的属性，可以为一个元素开启bfc，会变成一个独立的布局区域（将overflow设为非visible，hidden）
+简单理解就是具备BFC特性的元素, 就像被一个容器所包裹, 容器内的元素在布局上不会影响外面的元素。
+1.开启bfc的元素同级元素中第二个元素不会被浮动元素所覆盖
+2.开启bfc的元素子元素和父元素外边距不会重叠
+3.开启bfc的元素可以解决塌陷问题
+4.左边固定 右边自适应
+如何触发？
+全部设置浮动或者设置inline-block，fixed，absolute都可以触发
+副作用比较小的方式是overflow
+
+Clear的作用？
+如果我们不希望某个元素因为其他元素浮动的影响而改变位置，可以用通过clear清除浮动影响
+原理：浏览器自动为元素添加一个上边距
+开启bfc的元素子元素和父元素外边距不会重叠
+解决方法
+.box::before{content:’’;display:table}
+27.即解决高度塌陷又解决父子外边距重叠
+.clearfix::before,
+.clearfix::after,{
+	constant:’’,
+	display:table;
+	clear:both;
+}
+
+讲讲定位？
+relative：不脱离文档流，层次最上方，偏移量从原来自己的位置的原点开始算起
+Absolute：脱离文档流， 原点在最近的组件块级元素
+Fixed：几乎跟absolute一样，但是滑动固定不动
+sticky:position:relative和position:fixed的结合体
+https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/
+这就是position:sticky最基本的表现，特别适合导航的跟随定位效果。
+
+讲讲手机像素解决
+可以通过设置视口大小来调整
+<meta name=“viewpoint” content=“width=device-width”>设置完美视口
+
+设计图比例换算
+然后换算成对应的vw
+通过设置rem来方便计算
+
+响应式
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        @media only screen {
+            @media (min-width: 768px) {
+                body{
+                    background-color: yellowgreen;
+                }
+            }
+        }
+
+背景图片？
+Background-size : cover 比例不变元素铺满 content 比例不变完整显示
+
+Less?
+less是css的预处理语言，是css的增强版，写的更少，浏览器需要将less转换为css,可以像html一样层级元素，可以有变量
+
+.p1{
+    width: 100px;
+    height: 200px;
+}
+.p2:extend(.p1){
+    color: aqua;
+}
+等价于
+.p1,
+.p2 {
+  width: 100px;
+  height: 200px;
+}
+.p2 {
+  color: aqua;
+}
+
+
+用变量
+@a:yellow;
+div{
+    background-color: @a;
+}
+等价于
+div {
+  background-color: yellow;
+}
+
+公共类元素函数
+.p3(){
+    width: 50px;
+    height: 50px;
+}
+.p4{
+    .p3()
+}
+等价于
+.p4 {
+  width: 50px;
+  height: 50px;
+}
+
+flex？
+Css3出的弹性盒子布局
+
+自适应左边固定布局
+1..container {
+  display: flex;
+}
+
+.left {
+  flex-basis: 300px;
+  flex-shrink: 0;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+2.左边float 右边overflow：hidden
+
+介绍下重绘和回流（Repaint & Reflow），以及如何进行优化？
+重绘不一定需要重排，重排必然会导致重绘
+
+1、重排：当渲染树的一部分必须更新并且节点的尺寸发生了变化，浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。
+的部分失效，并重新构造渲染树。
+
+1）添加、删除可见的dom
+
+2）元素的位置改变
+
+3）元素的尺寸改变（外边距、内边距、边框厚度、宽高等几何属性）
+
+4）页面渲染初始化
+
+5）浏览器窗口尺寸改变
+
+2、重绘：是在一个元素的外观被改变所触发的浏览器行为，浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。
+重绘
+由于节点的几何属性发生改变或者由于样式发生改变而不会影响布局的，称为重绘，例如outline, visibility, color、background-color等，重绘的代价是高昂的，因为浏览器必须验证DOM树上其他节点元素的可见性。
+回流
+回流是布局或者几何属性需要改变就称为回流。回流是影响浏览器性能的关键因素，因为其变化涉及到部分页面（或是整个页面）的布局更新。一个元素的回流可能会导致了其所有子元素以及DOM中紧随其后的节点、祖先节点元素的随后的回流。
+JavaScript
+* 避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。
+* 避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中
+Css
+避免使用table布局，可能很小的一个小改动会造成整个 table 的重新布局。
+避免设置多层内联样式，CSS 选择符从右往左匹配查找，避免节点层级过多。
+
+居中的几种方法
+https://juejin.cn/post/6844903982960214029
+移动端不考虑兼容性
+flex
+考虑兼容性，不管定宽不定宽
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+
+几种常见的布局
+https://juejin.cn/post/6844903710070407182
+
+怎么画一个三角形
+    .triangle{
+        height: 0;
+        width: 0;
+        border: white 10px solid;
+        border-top-color: tomato;
+    }
+
+Flex:0 0 200px;
+0:放大比例
+0:缩小比例
+200px大小
+
+
+使用CSS3动画代替JS动画的好处？
+　1. 不占用JS主线程；
+　　2. 可以利用硬件加速；
+　　3. 浏览器可对动画做优化（元素不可见时不动画，减少对FPS的影响）。
+
+重排重绘补充
+重绘一定会导致重排
+1.批量修改DOM
+1）隐藏元素，进行修改后，然后再显示该元素
+2）使用文档片段创建一个子树，然后再拷贝到文档中 createDocumentFragment
+3）将原始元素拷贝到一个独立的节点中，操作这个节点，然后覆盖原始元素
+缓存布局信息
+
+总结：可以看到，IE盒模型的width是conteng+padding+boder的宽度，height是conteng+padding+boder的高度，
+所以width: 200px;height: 200px;是内容加内边距加边框的宽高；
+而W3C标准盒模型的width是content的宽度，height是content的高度，width: 200px;height: 200px;
+是内容的宽高，内边距和边框会在保证内容宽高不变的情况下加在外围的。
+box-sizing: border-box; //采用IE盒模型
+box-sizing: content-box; //采用W3C标准盒模型

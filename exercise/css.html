@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #box1 {
+            background-color: red;
+            height: 100px;
+            width: 800px;
+            overflow: hidden;
+        }
+
+        #box2 {
+            background-color: red;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+        }
+
+        #box3 {
+            background-color: green;
+            height: 200px;
+            width: 50px;
+            margin: 0 auto;
+
+        }
+
+        .outer {
+            /* border: indigo 10px solid; */
+            width: 50px;
+            height: 100px;
+            background-color: burlywood;
+            /* overflow: hidden; */
+        }
+
+        /* .outer::after{
+            content: '';
+            clear: both;
+            display: table;
+        } */
+        .inner {
+            margin-top: 50px;
+            height: 50px;
+            width: 50px;
+            background-color: black;
+            float: left;
+        }
+
+        .box {
+            height: 50px;
+            width: 50px;
+            background-color: green;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .demo div {
+            width: 40px;
+            height: 40px;
+        }
+
+        .demo1 {
+            margin: 10px 0;
+            background: pink;
+        }
+
+        .demo2 {
+            margin: 20px 0;
+            background: blue;
+        }
+
+        .float {
+            height: 100px;
+            width: 100px;
+            background-color: burlywood;
+            float: left;
+        }
+
+        .right {
+            height: 100px;
+            background-color: chartreuse;
+            overflow: hidden;
+        }
+
+        .triangle {
+            height: 0;
+            width: 0;
+            border: white 10px solid;
+            border-top-color: tomato;
+        }
+
+        body {
+            min-width: 1226px;
+        }
+
+        .global {
+            width: 1226px;
+            margin: 0 auto;
+        }
+
+        .header,
+        .footer {
+            height: 50px;
+            background-color: tomato;
+        }
+
+        .content {
+            height: 1000px;
+            background-color: violet;
+            margin: 20px 0;
+        }
+
+        /* .container1 {
+            padding-left: 120px;
+            padding-right: 120px;
+        }
+
+        .center1 {
+            width: 100%;
+            float: left;
+            height: 600px;
+            background-color: yellow;
+        }
+
+        .left {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            margin-left: -100%;
+            position: relative;
+            left: -120px;
+        }
+
+        .right {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            margin-left: -100px;
+            position: relative;
+            right: -120px;
+        } */
+
+ 
+        .container1 {
+            width: 100%;
+            float: left;
+        }
+
+        .center1 {
+          margin: 0 100px;
+          background-color: yellow;
+          height: 600px;
+        }
+
+        .left {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            margin-left: -100%;
+     
+        }
+
+        .right {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            margin-left: -100px;
+         
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="triangle"></div> -->
+    <!-- <div class="float">left</div>
+    <div class="right"></div> -->
+
+    <!-- <div id="box1">
+     <div id="box3">
+         fsadfsadfsadfsadfsa
+     </div>
+    </div> -->
+    <!-- <span id="box2">aaa</span> -->
+
+    <!-- <div class="outer">
+        <div class="inner"></div>
+    </div>
+    <div class="box">
+       
+    </div> -->
+    <!-- <div class="demo">
+        <div class="demo1"></div>
+        <div class="demo2"></div>
+    </div>
+     -->
+
+    <!-- 单列布局 -->
+    <!-- <div class="global">
+         <div class="header"></div>
+         <div class="content"></div>
+         <div class="footer"></div>
+    </div> -->
+
+    <!-- 圣杯 -->
+    <!-- <div class="container1">
+        <div class="center1">
+            <h2>dsaiudhfiashud</h2>
+        </div>
+
+        <div class="left"></div>
+        <div class="right"></div>
+    </div> -->
+
+    <!-- 双飞翼 -->
+
+    <article class="container1">
+        <div class="center1"></div>
+    </article>
+        <div class="left"></div>
+
+        <div class="right"></div>
+   
+
+
+
+    <script type="text/javascript">
+
+    </script>
+
+</body>
+
+</html>

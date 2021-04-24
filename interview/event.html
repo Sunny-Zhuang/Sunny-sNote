@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <div id="cool">
+    <input id="input"/>
+    </div>
+
+    <script type="text/javascript">
+
+        let div = document.getElementById('input')
+        let cool = document.getElementById('cool')
+        console.error(3333,div.innerHTML)
+        div.addEventListener('input',function(event){
+            console.error(444,this)
+            console.error(2222,event.target.value)
+            this.dispatchEvent(new CustomEvent('cool',{bubbles:true,detail:{text:event.target.value}}))
+        })
+        cool.addEventListener('cool',(event)=>{
+            console.error(111,event)
+        })
+
+       
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

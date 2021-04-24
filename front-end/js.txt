@@ -1,0 +1,221 @@
+JavaScript数据类型分哪些？
+Null undefined number string boolean symbol and 引用类型
+
+Js的类型判断方法？
+Typeof 返回数据类型的字符串表达式，可以判断undefined,number，string,boolean，function等,但不能判断array/object/null
+要能判断array/object和null
+ function getType(value) {
+            // 判断数据是 null 的情况 
+            if (value === null) {
+                return value + "";
+            }
+            // 判断数据是引用类型的情况 
+            if (typeof value === "object") {
+                let valueClass = Object.prototype.toString.call(value),
+                type = valueClass.split(" ")[1].split("");
+                type.pop();
+                return type.join("").toLowerCase();
+            } else {
+                // 判断数据是基本数据类型的情况和函数的情况 
+                return typeof value
+            }
+        }
+Instanceof 判断数据的具体类型 右边是不是左边的一个实例
+=== null undefined只有一个值可以用===判断
+array instanceof object， function instanceof object， true， true
+
+说一下类型转换？
+强制类型转换
+JavaScript 支持使用以下函数进行强制类型转换。
+* Boolean(value)：把参数值转换为布尔型值。
+* Number(value)：把参数值转换为数字。
+* String(value)：把参数值转换为字符串。
+自动类型转换
+‘a’+1 //‘a1’
+if(1) //true
+'5' - '2' // 3
+
+说说你对javascript的作用域的理解?
+作用域是指程序源代码中定义变量的区域。
+因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。
+
+什么是作用域链？
+当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做作用域链。
+
+解释下 let 和 const 的块级作用域？
+1. Var函数级元素，let/const块级元素
+2. Const不可重复赋值，let可以
+3. Var是变量提升的，const/let会存在暂时性死区
+
+说说js的执行上下文？
+执行上下文就是当前 JavaScript 代码被解析和执行时所在环境的抽象概念
+* JavaScript执行在单线程上，所有的代码都是排队执行。
+* 一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。
+* 每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。
+* 浏览器的JS执行引擎总是访问栈顶的执行上下文。
+* 全局上下文只有唯一的一个，它在浏览器关闭时出栈。
+
+闭包底层实现原理？
+在JavaScript中，作用域对象是在堆中被创建的（至少表现出来的行为是这样的），所以在函数返回后它们也还是能够被访问到而不被销毁。
+如果闭包函数被外部变量接收，那么这个存在于堆内存中的闭包函数对象就一直存在着（因为它被外部引用着，只要外部作用域不退出，就不会被垃圾回收清除）。那么这个函数对象上的 [[Scope]] 属性（即作用域链）自然就不会被清除，那么作用域链引用的所有层级包含函数的活动对象就不会被清除。
+这也就意味着，所有返回函数的函数被接收之后，都有占用内存的闭包问题。
+我们需要厘清的是，无论闭包的定义如何（是内部函数，还是被引用的外部函数），按照语言解释器的机制，无法被垃圾清除的是函数创建时的作用域链。
+闭包的条件？
+函数嵌套
+内部函数引用了外部函数的数据
+Return 内部函数
+闭包的产生与销毁？
+内部函数声明创建的时候产生，不被任何对象引用的时候销毁
+闭包的好处和坏处？
+延长变量生命周期， 使外部能访问内部函数（ex 模块封装）
+可能会产生内存泄漏
+闭包是什么？
+包含被引用变量（函数）的对象
+
+this
+然而，this 提供了一种更优雅的方式来隐式“传递”一个对象引用，因此可以将 API 设计 得更加简洁并且易于复用。
+test() window
+P.test() p
+New test() 新创建对象
+p.call(obj) obj
+1、this在函数定义的时候是没办法确定指向的，只有函数执行的时候，最后谁调用了它才能确定this指向谁
+2、如果函数中有this，但是函数本身没有被父级(上一级)对象调用，那么就指向window
+3、如果函数中有this，且函数本身被父级(上一级)对象调用，那么this就指向上一级对象
+箭头函数This指向问题
+箭头函数的this是静态的，指向声明时所在的作用域
+箭头函数适合与this无关的回调，定时器，数组
+不适合与this有关的，事件回调，对象方法
+就像我们看到的那样，回调函数丢失 this 绑定是非常常见的。除此之外，还有一种情 况 this 的行为会出乎我们意料：
+调用回调函数的函数可能会修改 this。在一些流行的 JavaScript 库中事件处理器常会把回调函数的 this 强制绑定到触发事件的 DOM 元素上。
+ 这在一些情况下可能很有用，但是有时它可能会让你感到非常郁闷。遗憾的是，这些工具 通常无法选择是否启用这个行为。
+ 使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。
+  1. 创建（或者说构造）一个全新的对象。 
+  2. 这个新对象会被执行 [[ 原型 ]] 连接。
+   3. 这个新对象会绑定到函数调用的 this。 
+ 4. 如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象。
+ 
+ 对象
+ 无论你叫它什么，在 JavaScript 中创建一个空对象最简单的方法都是 Object.create(null) （ 详 细 介 绍 请 看 第 5 章 ）。Object.create(null) 和 {} 很 像，
+  但 是 并 不 会 创 建 Object. prototype 这个委托，所以它比 {}“更空”：
+检查类型
+Object.prototype.toString.call( strObject ); // [object String]
+属性是否在object中
+("a" in myObject); // true 
+("b" in myObject); // false 
+myObject.hasOwnProperty( "a" ); // true 
+myObject.hasOwnProperty( "b" ); // false
+hasOwnProperty(..) 只会检查属性是否在 myObject 对象中，不会检查 [[Prototype]] 链。
+
+JavaScript原型链的意义是什么？
+https://zhuanlan.zhihu.com/p/161370971
+JavaScript的原型链就是该编程语言为了实现面对对象编程的一种设计，基于原型链，可以让JavaScript对象拥有封装、继承和多态等面对对象特性。
+脑子里要有一张原型链的图
+怎么实现继承？
+Student.prototype=new Person()
+Student.prototype.constructor = Student;
+Es5和es6继承上的区别？
+ES6中新增了class关键字来定义类，通过保留的关键字extends实现了继承。实际上这些关键字只是一些语法糖，底层实现还是通过原型链之间的委托关联关系实现继承。
+但是在 JavaScript 中，并没有类似的复制机制。你不能创建一个类的多个实例，只能创建 多个对象，它们 [[Prototype]] 关联的是同一个对象。
+但是在默认情况下并不会进行复制， 因此这些对象之间并不会完全失去联系，它们是互相关联的。
+ new Foo() 会生成一个新对象（我们称之为 a），这个新对象的内部链接 [[Prototype]] 关联 的是 Foo.prototype 对象。
+继承
+Bar.prototype = Object.create( Foo.prototype );
+这段代码的核心部分就是语句 Bar.prototype = Object.create( Foo.prototype )。
+调用 Object.create(..) 会凭空创建一个“新”对象并把新对象内部的 [[Prototype]] 关联到你 指定的对象（本例中是 Foo.prototype）。
+
+
+
+你对事件循环有了解吗？
+因为Javascript设计之初就是一门单线程语言，因此为了实现主线程的不阻塞，Event Loop这样的方案应运而生。
+1） 所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。
+（2） 主线程之外，还存在一个"任务队列"（task queue）。只要异步任务有了运行结果，就在"任务队列"之中放置一个事件。
+（3） 一旦"执行栈"中的所有同步任务执行完毕，系统就会读取"任务队列"，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。
+（4） 主线程不断重复上面的第三步
+在 js 中，任务分为宏任务(macrotask)和微任务(microtask)，这两个任务分别维护一个队列，均采用先进先出的策略进行执行！同步执行的任务都在宏任务上执行。
+宏任务主要有：script(整体代码)、setTimeout、setInterval、I/O、UI 交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)。
+微任务主要有：Promise.then、 MutationObserver、 process.nextTick(Node.js 环境)。
+先微任务再宏任务
+
+Js异步解决方案？
+https://zhuanlan.zhihu.com/p/36739965
+回调-》promise-〉generator-》await（promise和generator的语法糖）
+
+promise和async await的区别？
+PromisePromise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大，简单地说，Promise好比容器，里面存放着一些未来才会执行完毕（异步）的事件的结果，而这些结果一旦生成是无法改变的
+async awaitasync await也是异步编程的一种解决方案，他遵循的是Generator 函数的语法糖，他拥有内置执行器，不需要额外的调用直接会自动执行并输出结果，它返回的是一个Promise对象。
+Promise的出现解决了传统callback函数导致的“地域回调”问题，但它的语法导致了它向纵向发展行成了一个回调链，遇到复杂的业务场景，这样的语法显然也是不美观的。而async await代码看起来会简洁些，使得异步代码看起来像同步代码，await的本质是可以提供等同于”同步效果“的等待异步返回能力的语法糖，只有这一句代码执行完，才会执行下一句。
+async await与Promise一样，是非阻塞的。
+async await是基于Promise实现的，可以说是改良版的Promise，它不能用于普通的回调函数。
+
+正则
+Var reg = new RegExp(‘’正则表达式,’匹配模式’) 等价于字面量 /正则表达式/模式匹配
+Reg.test(‘测试的string’)
+匹配模式：
+G（全局）i（忽略大小写）
+37.使用｜表示或，[]里面的也是或的关系
+使用[A-z]表示是否有字母
+[^ab]除了 ab
+38.string的split，search，用正则拆分更灵活
+Ex: str = “213as0933nijvA”
+Result = str.match(/[a-z]/gi).   //asnijvA
+39.量词：可以设置内容出现的次数，只对前面的一个数字有用，所以可以用()
+{m}出现m次
+{m,n}出现m-n
+{m,}出现m次以上
+{n+}至少一个n
+{n*}零个或多个
+{n?}0个或一个
+Ex: /a{3}/	出现3次
+40:开头/^a/,结尾/a$/，限制有且仅有
+41..表示任意字符
+/\./用转义解决
+42
+\w任意字母，数字，下划线
+\W除了字母，数字，下划线
+\d 任意数字
+\D除了数字
+\s 空格
+\S除了空格
+\b单词边界
+\B除了单词边界
+43.邮箱
+任意字母数字下划线  .任意字母数字下划线(可选) @任意字母数字 .任意字母（2-5位）  @ .任意字母（2-5位）
+\^\w{3,} (\.\w)* @ [A-z0-9]+ (\.[A-z]{2,5}){1,2}$\
+
+var a = "a=1; b=2; c=3"
+const getCookie = function (name) {
+  let arr;
+  const reg = new RegExp(`(^| )${name}=([^;]*)(;|$)`);
+  if (arr = a.match(reg)){
+      console.error(arr)
+    return unescape(arr[2]);
+  }
+  return null;
+};
+
+
+正则练习
+1.时间匹配（23：32）
+var regex = /^([01][0-9]|[2][0-3]):[0-5][0-9]$/; 
+console.log( regex.test("23:59") ); - true
+2.日期匹配（yyyy-mm-dd）
+var regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/; 
+console.log( regex.test("2017-06-10") ); // => true 
+3.数字的千分分隔符表示法
+var result = "123456789".replace(/(?!^)(?=(\d{3})+$)/g, ',') 
+console.log(result); 
+// => “123,456,789"
+4.6-12位密码，由大写字母小写字母和数字组成，至少有两个字符
+var regex = /((?=.*[0-9])(?=.*[a-z])|(?=.*[0-9])(?=.*[A-Z])|(?=.*[a-z])(?=.*[A
+Z]))^[0-9A-Za-z]{6,12}$/; 
+console.log( regex.test("1234567") ); // false 
+5.替换
+var regex = /(\d{4})-(\d{2})-(\d{2})/;
+var string = "2017-06-12";
+var result = string.replace(regex, "$2/$3/$1")// => "06/12/2017" 
+6.身份证
+/^(\d{15}|\d{17}[\dxX])$/ 
+
+仅有async属性，脚本会异步执行
+仅有defer属性，脚本会在文档解析完毕后执行
+两个属性都没有，脚本会被同步下载并执行(顺序下载,顺序执行)，期间会阻塞文档解析

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>websocket try</title>
+    
+        <script type="text/javascript">
+            function WebSocketTest(){
+                if("WebSocket" in window){
+                    alert("your browser support websocket")
+                    var ws=new WebSocket("ws://localhost:8888")
+                    ws.onopen=function(){
+                        ws.send('send message')
+                        alert("message is sending")
+                    }
+                    ws.onmessage = function(event){
+                        var recieved_msg=event.data;
+                        alert("message has been recieved")
+                    }
+                    ws.onclose=function(){
+                        alert("connect is closing")
+                    }
+                }else{
+                    alert("your browser  doesn't support websocket")
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="sse">
+            <a href="javascript:WebSocketTest()">setup websocket</a>
+        </div>
+    </body>
+</html>

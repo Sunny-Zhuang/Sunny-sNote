@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body{
+            position: relative;
+        }
+        #box{
+            width: 100px;
+            height:100px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+</head>
+
+<body style="height:1000px">
+
+    <div id="box"></div>
+
+    <script type="text/javascript">
+        var dir=0
+        var boxDiv= document.getElementById('box')
+        // setInterval(() => {
+        //     switch(dir){
+        //         case 40:
+        //             boxDiv.style.top=boxDiv.offsetTop+10+'px'
+        //     }
+
+        // }, 30);
+
+        function aaa(){
+                boxDiv.style.top=boxDiv.offsetTop+10+'px'
+        }
+        (function a(){
+            aaa()
+            window.requestAnimationFrame(a)
+        })()
+
+    
+      
+      document.onkeydown=function(event){
+          console.error(111,event.keyCode)
+          dir=event.keyCode
+          return false
+      }
+      document.onkeyup=function(event){
+    
+          dir=0
+      }
+    </script>
+
+</body>
+
+</html>

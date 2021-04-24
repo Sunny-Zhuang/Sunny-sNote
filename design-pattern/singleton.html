@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function Person() {
+            this.name = 'sunny'
+            this.age = 12
+        }
+
+
+        var instance;
+        function SingleTon() {
+            if (!instance) instance = new Person()
+            return instance
+        }
+
+        const p1 = new SingleTon()
+        const p2 = new SingleTon()
+
+        console.error(p1, p2)
+        console.error(p1 === p2)
+
+        // 改进版:利用了闭包和立即执行函数
+
+        const singtonBetter = (function () {
+            let instance;
+            function Person() {
+                this.name = 'sunny'
+                this.age = 13
+            }
+            Person.prototype.call = function () {
+                console.error(1111)
+            }
+
+            return function aaa() {
+                if (!instance) instance = new Person()
+                return instance
+            }
+
+        })()
+
+        const p3 = singtonBetter()
+        const p4 = singtonBetter()
+
+        console.error(p3, p4)
+        console.error(p3 === p4)
+
+
+    </script>
+    </div>
+
+</body>
+
+</html>

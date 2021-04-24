@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        //1.内部属性 [[Class]] 是什么
+        //所有 typeof 返回值为 "object" 的对象（如数组）都包含一个内部属性 [[Class]]（我 们可以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问， 一般通过 Object.prototype.toString(..) 来查看。例如：
+
+        // Object.prototype.toString.call( [1,2,3] );  // "[object Array]" 
+        // Object.prototype.toString.call( /regex-literal/i ); //"[object RegExp]"
+
+        //2.说说事件委托
+        // 事件委托， 现实意义上讲是指将自己的事务嘱托他人代为处理。js中是 允许我们不必为某些特定的节点添加事件监听器，而是将事件监听器添加到（这些节点的）某个 parent节点上。利用事件冒泡，去找到匹配的子节点元素，然后做出相应的事件响应。是主要用来解决“事件处理程序过多”这个问题的。
+        // 经典例子：ul 里面的li的事件绑定。
+        // window.onload = function () {
+        //     var oUl = document.getElementById("ul");
+        //     var aLi = oUl.getElementsByTagName("li");
+
+        //     好处：
+        //     1， 简化了初始化的过程，减少了多余的事件处理函数，进而节省了内存。提高性能。
+        //     2，新添加的元素还会有之前的事件。
+
+        //     缺点：
+
+        //     第一，要求事件在IE中必须冒泡.大多数的事件会冒泡，但是并不是所有的。对于其他的浏览器而言，捕获阶段也会同样适用。
+        //     第二，理论上委托会导致浏览器额外的加载，因为在容器内的任意一个地方事件的发生，都会运行事件处理函数，所以多数情况下事件处理函数都是在空循环（没有意义的动作），通常不是什么大不了的事儿。
+        //     第三 如果现在的dom 元素分为很多很多层，对于底层事件的委托，有可能在事件冒泡的过程中，中途被某个节点 终止冒泡了，这样事件就传递不到上层，则委托就会失败了。
+
+        /*
+        这里要用到事件源：event 对象，事件源，不管在哪个事件中，只要你操作的那个元素就是事件源。
+        ie：window.event.srcElement
+        标准下:event.target
+        nodeName:找到元素的标签名
+        */
+        // oUl.onmouseover = function (ev) {
+        //     var ev = ev || window.event;
+        //     var target = ev.target || ev.srcElement;
+        //     //alert(target.innerHTML);
+        //     if (target.nodeName.toLowerCase() == "li") {
+        //         target.style.background = "red";
+        //     }
+        // }
+
+        //3.说说闭包
+        // 闭包是一种设计原则，它通过分析上下文，来简化用户的调用，让用户在不知晓的情况下，达到他的目的；
+        // 闭包的定义就是：有权访问另一个函数作用域中的变量的函数。简单来说就函数中的函数。从技术上来讲，在JS中，每个function都是闭包，因为它总是能访问在它外部定义的数据。很多时候我们写js的时候都用到了闭包，只是我们不知道已经用到了而已。
+        // 闭包的应用场景非常多。
+        // 例如
+
+        // 使用闭包代替全局变量, 构造块级作用域，进行模块化开发。
+        // 可解决： 全局变量有变量污染和变量安全等问题。
+        // 2.函数外或在其他函数中访问某一函数内部的参数
+        // 为了解决在Ajax callback回调函数中经常需要继续使用主调函数的某一些参数。
+        // 3.在函数执行之前为要执行的函数提供具体参数
+        // 某些情况下，是无法为要执行的函数提供参数，只能在函数执行之前，提前提供参数。
+        // 有哪些情况是延迟执行？
+        // 如：setTimeOut
+        // setInterval
+        // Ajax callbacks
+        // event handler[el.onclick = func 、 el.attachEvent("onclick", func)]
+
+        // 闭包是基于执行环境中的作用域的。执行环境就是一个定义了变量或者函数有权访问的其他数据，决定了它们各自的行为的环境。这个环境中有一个变量对象保存着环境中定义的所以变量和函数。
+        // 当函数在一个环境中执行时，会创建变量对象的一个作用域链。而当执行完这个函数时， 如果这时相应的变量对象没有被引用，则变量对象占用的空间会被释放。但是，当一个闭包内引用着活动对象中的变量时，活动对象不被释放。
+        // 由这个也可以看出，闭包的一个缺点就是会造成内存泄漏。
+        // 例如：
+        // 如果闭包的作用域链中保存着一个HTML 元素，那么就意味着该元素将无法被销毁，代码如下，只要匿名函数存在，element 的引用数至少也是 1，因此它所占用的内存就永远不会被回收。
+
+        // function assignHandler() {
+        //     var element = document.getElementById("someElement");
+        //     element.onclick = function () {
+        //         alert(element.id);
+        //     };
+        // }
+        // 所以《JavaScript高级程序设计》建议这么写：
+        // function assignHandler() {
+        //     var element = document.getElementById("someElement");
+        //     var id = element.id;
+
+        //     element.onclick = function () {
+        //         alert(id);
+        //     };
+
+        //     element = null;
+        // }
+    </script>
+    </div>
+
+</body>
+
+</html>

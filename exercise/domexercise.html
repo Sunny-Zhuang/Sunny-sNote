@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+    <form method="POST" action="">
+
+        你爱好的运动是？<input type="checkbox" id="checkallbox">全选/全不选
+
+        <br />
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="羽毛球">羽毛球
+        <input type="checkbox" name="items" value="乒乓球">乒乓球
+
+        <br />
+        <input type="button" id="checkedallbtn" value="全选">
+        <input type="button" id="checkednobtn" value="全不选">
+        <input type="button" id="checkedrevbtn" value="反选">
+        <input type="button" id="checkedsubmit" value="提交">
+    </form>
+
+    <script type="text/javascript">
+
+        var checkallboxnodes = document.getElementById('checkedallbtn')
+        checkallboxnodes.onclick = function () {
+            var checklist = document.getElementsByName('items')
+            checklist.forEach(item => {
+                item.checked = true;
+            })
+            checkallboxanodes.checked = true;
+        }
+        checkednobtnnodes.addEventListener
+        var checkednobtnnodes = document.getElementById('checkednobtn')
+        checkednobtnnodes.onclick = function () {
+            var checklist = document.getElementsByName('items')
+            checklist.forEach(item => {
+                item.checked = false;
+            })
+            checkallboxanodes.checked = false;
+        }
+        var checkedrevbtnnodes = document.getElementById('checkedrevbtn')
+        checkedrevbtnnodes.onclick = function () {
+            var checklist = document.getElementsByName('items')
+            checklist.forEach(item => {
+                item.checked = !item.checked;
+                checkallboxanodes.checked = true;
+                checklist.forEach(item => {
+                    if (!item.checked) {
+                        checkallboxanodes.checked = false
+                    }
+                })
+            })
+        }
+        var checkedsubmitnodes = document.getElementById('checkedsubmit')
+        checkedsubmitnodes.onclick = function () {
+            var checklist = document.getElementsByName('items')
+            checklist.forEach(item => {
+                if (item.checked) {
+                    alert('submit' + item.value)
+                }
+            })
+        }
+        var checkallboxanodes = document.getElementById('checkallbox')
+        checkallboxanodes.onclick = function () {
+            var checklist = document.getElementsByName('items')
+            var flag=false;
+            checklist.forEach(item => {
+                if (checkallboxanodes.checked) {
+                    item.checked = true;
+
+                } else {
+                    item.checked = false;
+                }
+               
+            })
+            
+            
+        }
+
+
+        var items = document.getElementsByName('items')
+        items.forEach(item => {
+            item.onclick = function () {
+                checkallboxanodes.checked = true;
+                items.forEach(item => {
+                    if (!item.checked) {
+                        checkallboxanodes.checked = false
+                    }
+                })
+            }
+        })
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

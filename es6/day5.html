@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        class Person{
+            constructor(name,age){
+                this.name=name
+                this.age=age
+            }
+            get price(){
+                console.error('person get price')
+                return 'iloveyou'
+            }
+            set price(newVal){
+                console.error('person set value')
+            }
+            call(){
+                console.log('person call')
+            }
+        }
+
+        let p = new Person('sunny',25)
+        console.error(2222,p.price)
+
+        class Student extends Person{
+            constructor(name,age,price){
+                super(name,age)
+                this.price=price
+            }
+            readPrice(){
+                console.log('i have price')
+            }
+        }
+        let s = new Student('sunny',25,20000)
+        console.error(111,s.readPrice())    
+
+
+
+    </script>
+    </div>
+
+</body>
+
+</html>

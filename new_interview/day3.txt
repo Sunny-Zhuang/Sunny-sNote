@@ -1,0 +1,7 @@
+1.缓存
+https://zhuanlan.zhihu.com/p/28113197
+除了HTTP标准缓存以外，浏览器还有可能存在标准以外的缓存机制。对于Chrome浏览器而言还存在Memory Cache、Push “Cache”。
+一个请求在查找资源的过程中经过的缓存顺序是Memory Cache、Service Worker、HTTP Cache、Push “Cache”
+
+2.浏览器缓存
+https://juejin.cn/post/6844903599537930253

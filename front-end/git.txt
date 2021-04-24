@@ -1,0 +1,15 @@
+git
+https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424
+合并自己的分支到master
+git checkout -b dev
+Git add
+Git commit -m 
+git checkout master
+git merge dev
+git branch -d dev
+版本回溯
+git reset --hard commit_id
+撤销分支
+git checkout -- readme.txt
+删除文件
+git rm test.txt

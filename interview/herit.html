@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+     function Person(name,age){
+         this.name = name;
+         this.age = age;
+         console.error(4444)
+     }
+     Person.prototype.sayName=function(){
+         console.error('hello my name is '+this.name)
+     }
+
+     function create(proto){
+        function Fn(){
+
+        }
+        Fn.prototype=proto
+        return new Fn()
+     }
+
+
+     function Student(name,age){
+         Person.call(this,name,age)
+     }
+    //  Student.prototype=new Person()
+    Student.prototype=create(Person.prototype)
+    Student.prototype.constructor = Student;
+     let st = new Student('sunny',25)
+     console.error(1111,st)
+     st.sayName()
+     console.error(222,st.constructor)
+    </script>
+
+    </div>
+
+</body>
+
+</html>

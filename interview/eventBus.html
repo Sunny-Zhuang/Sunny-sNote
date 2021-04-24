@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+          function EventBus(){
+           this._events = {}
+       }
+
+       EventBus.prototype.addListener = function(eventid,func){
+            const callbacks = this._events[eventid]
+            if(!callbacks){
+                this._events[eventid] = [func]
+                return
+            }
+            this._events[eventid].push(func)
+       }
+
+       EventBus.prototype.emit = function(eventid){
+            const callbacks = this._events[eventid]
+            if(!callbacks){return}
+            callbacks.forEach(element => {
+                element.apply(this,Array.from(arguments).slice(1))
+            });
+       }
+
+       EventBus.prototype.removeListener = function(eventid,func){
+            const callbacks = this._events[eventid]
+            if(!callbacks){return}
+            callbacks.forEach((element,key)=>{
+                if(element===func){
+                    callbacks.splice(key,1)
+                }
+            })
+           
+       }
+
+       const bus = new EventBus();
+       function fun1(){
+           console.error(1)
+           console.error(this)
+       }
+       bus.addListener('sayhello',()=>{
+           console.error(0)
+           console.error(this)
+       })
+
+       bus.addListener('sayhello',fun1)
+
+    //    bus.emit('sayhello')
+       bus.removeListener('sayhello',fun1)
+       bus.emit('sayhello')
+
+
+    </script>
+
+    </div>
+
+</body>
+
+</html>

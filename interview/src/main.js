@@ -1,0 +1,1 @@
+export {map} from './array/map'

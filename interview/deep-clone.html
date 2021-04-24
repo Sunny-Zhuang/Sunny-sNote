@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+     <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function deepClone(target,map=new Map()){
+            if(target instanceof Array || (target!==null && typeof target ==='object')){
+                console.error(111,map.get(target),target)
+                let cloneTarget = map.get(target)
+                if(cloneTarget){
+                    return cloneTarget;
+                }
+                cloneTarget = target instanceof Array?[]:{}
+                console.error(222,cloneTarget)
+                map.set(target,cloneTarget)
+                for(const key in target){
+                    if(target.hasOwnProperty(key)){
+                        console.error(key)
+                        cloneTarget[key]=deepClone(target[key],map)
+                        console.error(33,cloneTarget)
+                    }
+                    
+                }
+                return cloneTarget
+            }else{
+                return target;
+            }
+        }
+
+        
+        const obj3={a:'aa',
+        b:{c:[1,2]},
+        c:function (){}
+        }
+        const cloneobj=deepClone(obj3)
+        // const cloneobj=JSON.parse(JSON.stringify(obj3))
+        console.error(2222,cloneobj===obj3,obj3.b.c===cloneobj.b.c)
+
+       
+       
+    </script>
+
+    </div>
+
+</body>
+
+</html>

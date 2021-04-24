@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+       img{
+           width: 300px;
+           height: 200px;
+       }
+    </style>
+</head>
+
+<body style="height:1000px">
+
+    <img src='' id='imagePic'></img>
+    <button id="start">start</button>
+    <button id="end">end</button>
+
+    <script type="text/javascript">
+       const imgList = ['./aa.webp','./bb.webp','./cc.webp','./dd.webp']
+       var timer;
+       document.getElementById('start').onclick=function(){
+           var index=0;
+           clearInterval(timer)
+           timer = setInterval(()=>{
+               index++;
+
+               if(index===imgList.length){
+                   index=0
+               }
+               document.getElementById('imagePic').src = imgList[index]
+           }),500
+       }
+       document.getElementById('end').onclick=function(){
+           clearInterval(timer)
+       }
+    </script>
+
+</body>
+
+</html>

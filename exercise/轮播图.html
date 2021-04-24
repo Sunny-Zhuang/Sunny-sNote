@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="轮播图.css">
+</head>
+
+<body>
+
+    <div id="outer">
+        <ul id="img-list">
+            <li><img src="./aa.webp"></li>
+            <li><img src="./cc.webp"></li>
+            <li><img src="./dd.webp"></li>
+            <li><img src="./aa.webp"></li>
+        </ul>
+        <div id="navDiv">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+
+    <script>
+        var imglist = document.getElementById('img-list')
+        var length = imglist.getElementsByTagName('li').length
+        var allA = document.getElementsByTagName('a')
+        var index = 0;
+        allA[0].style.backgroundColor = 'black'
+        var timer;
+        autoChange()
+        //自动切换
+        function autoChange() {
+            timer = setInterval(function () {
+                index = index + 1
+                move(imglist, 'left', -420 * index, 30, function () {
+                    setA()
+                })
+
+
+            }, 3000)
+        }
+
+        //点击切换
+        for (let i = 0; i < allA.length; i++) {
+            allA[i].onclick = function () {
+                clearInterval(timer)
+                index = i
+                setA()
+                // imglist.style.left = (0 - 420 * i) + 'px'
+                move(imglist, 'left', -420 * i, 30, function () {
+                    autoChange()
+                })
+            }
+        }
+        function setA() {
+            if (index >= length - 1) {
+                index = 0
+                imglist.style.left = 0
+            }
+            for (let i = 0; i < allA.length; i++) {
+                allA[i].style.backgroundColor = ''
+
+            }
+            allA[index].style.backgroundColor = 'black'
+
+        }
+
+        function move(obj, attr, target, speed, callback) {
+            clearInterval(obj.timer)
+            var current = parseInt(getComputedStyle(obj, null)[attr])
+            if (current > target) {
+                speed = -speed
+            }
+            obj.timer = setInterval(function () {
+                var oldValue = parseInt(getComputedStyle(obj, null)[attr])
+                var newValue = oldValue + speed;
+                obj.style[attr] = newValue + 'px'
+                if (newValue === target) {
+                    clearInterval(obj.timer)
+                    if (callback) {
+                        callback()
+                    }
+                }
+            }, 30)
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

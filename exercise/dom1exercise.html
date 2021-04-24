@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <table id="employeeTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">Delete</td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">Delete</td>
+        </tr>
+        <tr>
+            <td>Sunny</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="javascript:;">Delete</td>
+        </tr>
+    </table>
+
+    <table id="">
+        <tr>
+            <td class="word">name:</td>
+            <td class="inp">
+                <input type="text" name="empName" id="empName" />
+            </td>
+        </tr>
+        <tr>
+            <td class="word">email:</td>
+            <td class="inp">
+                <input type="text" name="email" id="email" />
+            </td>
+        </tr>
+        <tr>
+            <td class="word">salary:</td>
+            <td class="inp">
+                <input type="text" name="salary" id="salary" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" ></td>
+            <button id="addEmpBtn" value="abc">
+                submit
+            </button>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+
+        function delA(){
+            var removetr = this.parentNode.parentNode
+                console.error(1111,removetr.getElementsByTagName('td')[0].innerHTML)
+                var flag=confirm('are you sure to delete'+removetr.getElementsByTagName('td')[0].innerHTML)
+                if(flag){
+                    removetr.parentNode.removeChild(removetr)
+                }
+        }
+        //delete
+        var allA = document.getElementsByTagName('a')
+        var tableList = document.getElementById('employeeTable')
+        console.error(allA)
+        for(let i =0;i<allA.length;i++){
+            console.error(allA[i])
+            allA[i].onclick=delA
+            // function(){
+                // var removetr = this.parentNode.parentNode
+                // console.error(1111,removetr.getElementsByTagName('td')[0].innerHTML)
+                // var flag=confirm('are you sure to delete'+removetr.getElementsByTagName('td')[0].innerHTML)
+                // if(flag){
+                //     removetr.parentNode.removeChild(removetr)
+                // }
+            //     return false;
+            // }
+        }
+
+        //update
+        var subbtn = document.getElementById('addEmpBtn')
+        subbtn.onclick=function(){
+            var name = document.getElementById('empName').value
+            var email = document.getElementById('email').value
+            var salary = document.getElementById('salary').value
+
+            var tr=document.createElement('tr')
+            //way1
+
+            // var nameTd = document.createElement('td')
+            // var emailTd = document.createElement('td')
+            // var salaryTd = document.createElement('td')
+            // var aTd = document.createElement('td')
+            // var a = document.createElement('a')
+
+            // var nameText = document.createTextNode(name)
+            // var emailText = document.createTextNode(email)
+            // var salaryText = document.createTextNode(salary)
+            // var atext = document.createTextNode('delete')
+
+            // nameTd.appendChild(nameText)
+            // emailTd.appendChild(emailText)
+            // salaryTd.appendChild(salaryText)
+            // a.appendChild(atext)
+            // a.href="javascript:;"
+            // a.onclick=delA
+            // aTd.appendChild(a)
+
+            // tr.appendChild(nameTd)
+            // tr.appendChild(emailTd)
+            // tr.appendChild(salaryTd)
+            // tr.appendChild(aTd)
+
+            //way2
+            tr.innerHTML = "<td>"+name+"</td>"+
+                            "<td>"+email+"</td>"+
+                            "<td>"+salary+"</td>"+
+                            "<td><a href='javascript:;'>Delete</td>"
+
+            tr.getElementsByTagName('a')[0].onclick =delA
+
+
+            var tbaleRealList=tableList.getElementsByTagName('tbody')[0]
+            tbaleRealList.appendChild(tr)
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        //1.Reflect 对象创建目的？
+//         将 Object 对 象 的 一 些 明 显 属 于 语 言 内 部 的 方 法 （ 比 如 Object.defineProperty，放到 Reflect 对象上。
+// 修改某些 Object 方法的返回结果，让其变得更合理。
+// 让 Object 操作都变成函数行为。
+// Reflect 对象的方法与 Proxy 对象的方法一一对应，只要是 Proxy 对象 的方法，就能在 Reflect 对象上找到对应的方法。这就让 Proxy 对象可 以方便地调用对应的 Reflect 方法，完成默认行为，作为修改行为的基础。
+// 也就是说，不管 Proxy 怎么修改默认行为，你总可以在 Reflect 上获取 默认行为。
+
+        //2如何优化SPA应用的首屏加载速度慢的问题？
+//         将公用的JS库通过script标签外部引入，减小app.bundel的大小，让浏览器并行下载资源文件，提高下载速度；
+// 在配置 路由时，页面和组件使用懒加载的方式引入，进一步缩小 app.bundel 的体积，在调用某个组件时再加载对应的js文件；
+// 加一个首屏 loading 图，提升用户体验；
+// 如果在webview中的页面，可以进行页面预加载
+// 独立打包异步组件公共 Bundle，以提高复用性&缓存命中率
+// 静态文件本地缓存，有两种方式分别为HTTP缓存，设置Cache-Control，Last-Modified，Etag等响应头和Service Worker离线缓存
+// 配合 PWA 使用
+// SSR
+
+//3说说对MVC,MVVC,MVVM模式的理解
+// MVC(Model-View-Controller)
+// Model(模型):数据层，负责存储数据。
+// View(视图):展现层，用户所看到的页面
+// Controller(控制器):协调层，负责协调Model和View，根据用户在View上的动作在Model上作出对应的更改，同时将更改的信息返回到View上。
+
+// 三者之间的关系
+// Controller可以直接访问Model，也可以直接控制View,但是Model和View不能相互通信，相当于COntroller就是介于这两者之间的协调者。
+
+// MVVM(Model-View-ViewModel)
+// Model(模型):数据层，负责存储数据。
+// View(控制器):就是ViewController层，他的任务就是从ViewModel层获取数据，然后显示。
+// ViewModel(视图模型):就是View和Model层的粘合剂，封装业务逻辑处理，封装网络处理，封装数据缓存。就是把原来ViewController层的业务逻辑和页面逻辑等剥离出来放到ViewModel层。
+
+// MVVC(Model-View-View-Controller)
+// Model(模型):数据层，负责存储数据。
+// View(视图):展现层，创建需求创建cell
+// View(视图):定义数组，用来接收控制中的数据。处理回调（比如:刷新回调、点击cell回调、加载更多回调、动态视图高度回调等等）
+// Controller(控制器):加载网络数据懒加载
+
+    </script>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+           function * gen(arg){
+               console.error(111,arg)
+               yield 222;
+               yield 3333;
+           }
+
+           let iterator = gen('aaa')
+           console.error(iterator)
+           console.error(iterator.next())
+
+           //防止回调地狱实例
+           function one(){
+               setTimeout(() => {
+                   console.error(1111)
+                   ita.next()
+               }, 1000);
+           }
+
+           var aaaa=''
+           function two(){
+               setTimeout(() => {
+                   console.error(2222)
+                   let data ='222'
+                   aaaa=data
+                   ita.next(data)
+               }, 2000);
+           }
+
+           function three(predata){
+               setTimeout(() => {
+                   console.error(3333,aaaa)
+                   ita.next()
+               }, 3000);
+           }
+
+           function * generate(){
+               yield one();
+               yield two();
+               yield three(two);
+           }
+           let ita = generate()
+           ita.next()
+
+
+    </script>
+    </div>
+
+</body>
+
+</html>

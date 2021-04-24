@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        //1.FCP/FMP/FP 分别是怎样定义，如何统计
+//         FP
+//         含义
+//         FP（全称“First Paint”，翻译为“首次绘制”） 是时间线上的第一个“时间点”，它代表浏览器第一次向屏幕传输像素的时间，也就是页面在屏幕上首次发生视觉变化的时间。
+
+//         注意：FP不包含默认背景绘制，但包含非默认的背景绘制。
+
+//         统计逻辑
+//         通过performance.getEntriesByType('paint’)，取第一个pain的时间
+
+// FCP
+// 含义
+// FCP（全称“First Contentful Paint”，翻译为“首次内容绘制”），顾名思义，它代表浏览器第一次向屏幕绘制 “内容”。
+
+//             注意：只有首次绘制文本、图片（包含背景图）、非白色的canvas或SVG时才被算作FCP。
+
+//             统计逻辑
+// 通过performance.getEntriesByType('paint’)，取第二个pain的时间，或者通过Mutation Observer观察到首次节点变动的时间
+
+// 注意
+// FP与FCP这两个指标之间的主要区别是：FP是当浏览器开始绘制内容到屏幕上的时候，只要在视觉上开始发生变化，无论是什么内容触发的视觉变化，在这一刻，这个时间点，叫做FP。
+
+//                 相比之下，FCP指的是浏览器首次绘制来自DOM的内容。例如：文本，图片，SVG，canvas元素等，这个时间点叫FCP。
+
+//                 FP和FCP可能是相同的时间，也可能是先FP后FCP。
+
+//                 FMP
+// 含义
+// FirstMeaningfulPaint是页面主要内容出现在屏幕上的时间, 这将是用户感知加载体验的主要指标。目前尚无标准化的定义, 因为很难以通用的方式去确定各种类型页面的关键内容。实践中, 可以将页面评分最高的可见内容出现在屏幕上的时间作为FirstMeaningfulPaint。
+
+//                 统计逻辑
+// Mutation Observer将会观察页面加载的前30S内页面节点的变化, 将新增 / 移除的节点加入 / 移除Intersection Observer, 这样可以得到页面元素的可见时间点及元素与可视区域的交叉信息。
+
+//                 根据元素的类型进行权重取值, 然后取元素与可视区域的交叉区域面积、可见度、 权重值之间的乘积为元素评分。
+
+//                 根据上面得到的信息, 以时间点为X轴, 该时间点可见元素的评分总和为Y轴, 取最高点对应的最小时间为页面主要内容出现在屏幕上的时间。
+
+//                 取Mutation Observer 与 Intersection Observer的浏览器兼容性交集, 则此估算方法支持Chrome 51以上版本、Firefox 55以上版本及Edge 15以上版本。
+
+        //2.es 静态分析原理
+        // https://zhuanlan.zhihu.com/p/33843378
+//         ES6 模块输出的是值的引用，输出接口动态绑定，而 CommonJS 输出的是值的拷贝
+// ES6 模块编译时执行，而 CommonJS 模块总是在运行时加载
+
+        //3.
+
+
+
+    </script>
+    </div>
+
+</body>
+
+</html>

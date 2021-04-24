@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+        function problemA(R,C){
+            if(isNumber(R)&&isNumber(C)&&(C>=1&&C<=R&&R<=100)){
+                if(C===R){
+                    console.error(111,C,R)
+                    return 0.0;
+                }else{
+                    console.error(2222,C,R)
+                    return (C*C/R/R)*100
+                }
+            }else{
+                throw Error('invalid input')
+            }
+
+        }
+
+        function isNumber(value){
+            if(typeof value === 'number'){
+                return true
+            }else{
+                false
+            }
+        }
+
+        console.error('problemA result',problemA(100,1))
+
+        //由于在职的公司有个紧急defect需要跟native的同事在线联调，但不想放弃这次机会，也为了显示我足够的诚意，请允许我写出problemb解题思路，谢谢
+
+        //按照双面镜的物理原理，和结合sample的输入输出，入口是暗处，出口是亮处
+        //思路1
+        //1.考虑结构用二维数组，方便快速查找比对
+        //2.考虑先找到入口然后根据规律找出口
+        //3.如果入口在纵列，就遍历横向，如果过程中都是‘.’,则是最后一个是出口
+        //4.如果碰到‘/’,则向下和向右查一位，如果查到的是‘.’,则出口是向下到底向右出口到‘/’的距离
+        //5.如若碰到‘/’‘\’连续的双面镜，归纳出2*2*2，8种情况会在的位置，得出答案
+        //6.如果碰到‘\’,则向上向右跟不走4以后一样的思路
+        //7.入口纵列思路与3-6相似
+
+        //思路2
+        //遍历处出口外所有可能的入口进行反推，看哪个可以找到入口
+
+        //思路1需要归纳总结，空间复杂度低，思路2较少的总结，牺牲了空间复杂度
+
+        //problemc
+
+
+
+    </script>
+
+    </div>
+
+</body>
+
+</html>

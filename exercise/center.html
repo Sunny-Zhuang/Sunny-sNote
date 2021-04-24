@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="mystyle2.css">
+</head>
+
+<body class="clearfix">
+    <script type="text/javascript">
+        function handleScroll(event){
+            console.error(111,event)
+            var rightDiv = document.getElementById("right");
+            console.error('scroll',rightDiv.style.right)
+            if(rightDiv.style.right==='0px'){
+                rightDiv.style.right ="-30%"
+            }else{
+                rightDiv.style.right ="0"
+            }
+        }
+        function handleDelete(){
+            var wrapperDiv = document.getElementById("wrapper");
+            wrapperDiv.style.display = "none"
+        }
+    </script>
+    <div class="parent1">
+        <div class="child1"></div>
+    </div>
+
+    <!-- <div class="container">
+        <div class="center"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div> -->
+<!-- 
+    <div class="container">
+        <div class="center"></div>
+    </div>
+    <div class="left"></div>
+    <div class="right"></div> -->
+    <div id="wrapper" class="wrapper" onclick="handleScroll(event)">
+        <div id="item" class="item"></div>
+        <div id="right" class="right" onclick="handleDelete()"></div>
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+</head>
+
+<body class="clearfix">
+
+    <button id="clickButton">click me</button>
+
+    <script type="text/javascript">
+
+        function Promise(excutor) {
+            this.PromiseState = 'pending'
+            this.PromiseResult = null
+            this.callback = []
+            self = this
+            function resolve(data) {
+                if (self.PromiseState !== 'pending') return
+                self.PromiseState = 'fulfilled'
+                self.PromiseResult = data
+                self.callback.forEach(item => {
+                    item.onResolved(data)
+                });
+                // if (self.callback.onResolved) {
+                //     self.callback.onResolved(data)
+                // }
+            }
+            function reject(data) {
+                if (self.PromiseState !== 'pending') return
+                self.PromiseState = 'rejected'
+                self.PromiseResult = data
+                self.callback.forEach(item => {
+                    item.onResolved(data)
+                });
+                // if (self.callback.onRejected) {
+                //     self.callback.onRejected(data)
+                // }
+            }
+            try {
+                excutor(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+        Promise.prototype.then = function (onResolved, onRejected) {
+            self = this
+            if (onRejected !== 'function') {
+                onRejected = reason => {
+                    throw reason
+                }
+            }
+            return new Promise((resolve, reject) => {
+                if (this.PromiseState === 'fulfilled') {
+                    let result = onResolved(this.PromiseResult)
+                    if (result instanceof Promise) {
+                        result.then((result) => {
+                            resolve(result)
+                        }, (err) => {
+                            reject(err)
+                        })
+                    } else {
+                        resolve(result)
+                    }
+                }
+                if (this.PromiseState === 'rejected') {
+                    console.error('rejected')
+                    let result = onRejected(this.PromiseResult)
+                    if (result instanceof Promise) {
+                        result.then((result) => {
+                            resolve(result)
+                        }, (err) => {
+                            reject(err)
+                        })
+                    } else {
+                        resolve(result)
+                    }
+                }
+                if (this.PromiseState === 'pending') {
+                    this.callback.push(
+                        {
+                            onResolved: function () {
+                                console.error('success')
+                                let result = onResolved(self.PromiseResult)
+                                if (result instanceof Promise) {
+                                    result.then((result) => {
+                                        resolve(result)
+                                    }, (err) => {
+                                        reject(err)
+                                    })
+                                } else {
+                                    resolve(result)
+                                }
+                            },
+                            onRejected: function () {
+                                console.error('error')
+                                let result = onRejected(self.PromiseResult)
+                                if (result instanceof Promise) {
+                                    result.then((result) => {
+                                        resolve(result)
+                                    }, (err) => {
+                                        reject(err)
+                                    })
+                                } else {
+                                    reject(result)
+                                }
+                            }
+                        }
+                    )
+                }
+
+            })
+
+        }
+
+
+        Promise.resolve = function (param) {
+            return new Promise((resolve, reject) => {
+                if (param instanceof Promise) {
+                    param.then(result => {
+                        resolve(result)
+                    }, error => {
+                        reject(error)
+                    })
+                } else {
+                    resolve(param)
+                }
+            })
+        }
+
+        Promise.reject = function (param) {
+            return new Promise((resolve, reject) => {
+                reject(param)
+            })
+        }
+
+        Promise.all = function (array) {
+            return new Promise((resolve, reject) => {
+                let count = 0;
+                let arr = []
+                for (let i = 0; i < array.length; i++) {
+                    array[i].then(result => {
+                        count++;
+                        arr[i] = result
+                        if (count === array.length) {
+                            console.error(666,arr,resolve)
+                            resolve(arr)
+                        }
+                    }, error => {
+                        reject(error)
+                    })
+                }
+            })
+
+        }
+
+        const p = Promise.resolve('ok')
+        const p2 = Promise.resolve('success')
+        const p3 = Promise.resolve('oh yeah')
+
+        console.error([p, p2, p3])
+        const result = Promise.all([p, p2, p3])
+        console.error('result', result)
+
+
+    </script>
+    </div>
+
+</body>
+
+</html>

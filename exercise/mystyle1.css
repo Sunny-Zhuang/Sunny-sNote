@@ -1,0 +1,143 @@
+ul{
+    list-style-type: none;
+}
+li{
+    display: inline;
+}
+.dropdown{
+    position: absolute;
+    display:inline-block;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+
+
+
+.imgwrapper{
+    width: 100px;
+    height: 400px;
+    background-color: aquamarine;
+    overflow: hidden;
+}
+
+.imgitem{
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.pwrapper{
+    width: 200px;
+    height: 600px;
+    background-color: aquamarine;
+}
+.pinfo{
+    margin:4px;
+}
+.pinfo:hover{
+    background-color: rebeccapurple;
+}
+.box1{
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+}
+.box2{
+    width: 100px;
+    height: 100px;
+    background-color: burlywood;
+    position: relative;
+    left:100px;
+    top:-100px;
+}
+.box3{
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+}
+.box4{
+    border: 1px solid red;
+    /* overflow: hidden; */
+}
+.box4::after{
+    content:'';
+    display: block;
+    clear: both;
+}
+.box5{
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+    float: left;
+}
+.box6{
+    width: 200px;
+    height: 200px;
+    background-color: yellowgreen;
+}
+
+.box7{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin-top: 50px;
+}
+.clearfix::before,
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.box8{
+    width: 400px;
+    height: 400px;
+    background-color: green;
+    position: relative;
+}
+.box9{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: relative;
+}
+.box10{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.box11{
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    position: relative;
+
+}
+.box12{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    
+}

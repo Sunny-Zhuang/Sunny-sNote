@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+    </style>
+    <script src="./dist/arrayutil.min.js"></script>
+</head>
+
+<body class="clearfix">
+
+    <script type="text/javascript">
+
+
+        //way1 递归
+        function flatten(array) {
+            return array.reduce((pre, item) => {
+                console.error('item', item)
+                if (!Array.isArray(item)) {
+                    pre.push(item)
+                    console.error(1111, pre)
+                } else {
+                    pre = pre.concat(flatten(item))
+                    console.error(222, pre)
+                }
+                return pre;
+            }, [])
+        }
+
+        //way2 more efficient
+        function flatten1(array) {
+            var arr = [].concat(...array);
+            while (arr.some((item) => Array.isArray(item))) {
+                arr = [].concat(...arr);
+            }
+            return arr;
+        }
+
+
+        var array = [1, [3, [2, 4]]]
+        console.error(3333, flatten(array))
+
+        //对象扁平化
+        function objectFlat(obj = {}) {
+            const res = {}
+            function flat(item, preKey = '') {
+                Object.entries(item).forEach(([key, val]) => {
+                    const newKey = preKey ? `${preKey}.${key}` : key
+                    if (val && typeof val === 'object') {
+                        flat(val, newKey)
+                    } else {
+                        res[newKey] = val
+                    }
+                })
+            }
+            flat(obj)
+            return res
+        }
+
+        // 测试
+        const source = { a: { b: { c: 1, d: 2 }, e: 3 }, f: { g: 2 } }
+        console.log(objectFlat(source));
+
+
+    </script>
+
+    </div>
+
+</body>
+
+</html>
